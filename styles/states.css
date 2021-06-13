@@ -1,0 +1,83 @@
+.fill {
+    width: 100%;
+}
+
+.centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.row {
+    flex-direction: row;
+}
+
+.border {
+    box-sizing: border-box;
+    border-style: solid;
+    border-radius: 2rem;
+    border-color: var(--col_accent);
+    border-width: 0.5rem;
+}
+
+.btn[checked] {
+    background-color: var(--col_text);
+    color: var(--col_accent);
+}
+
+.btn[outer_type] {
+    box-sizing: border-box;
+    margin: 2rem;
+    padding: 2rem;
+    border-radius: 2rem;
+    background-color: var(--col_text);
+    color: var(--col_accent);
+}
+
+.btn[show_type] {
+    height: 0.5rem;
+    width: 10rem;
+}
+
+.btn[highlighted] {
+    background-color: var(--col_highlight);
+    color: var(--col_text);
+}
+
+.cb[checked] {
+    background-color: var(--col_highlight);
+    box-shadow: inset 0 0 0 0.7rem var(--col_text);
+}
+
+.panel[checked] {
+    display: flex;
+}
+
+.ball_stripe[checked] {
+    background-color: var(--col_highlight);
+}
+
+.error {
+    color: var(--col_highlight);
+}
+
+.img_ball[checked] {
+    opacity: var(--val_fade);
+}
+
+figure[vis] {
+    display: flex;
+}
+
+figure[checked] {
+    opacity: var(--val_fade);
+}
+
+.divulged_ball[checked] {
+    opacity: var(--val_fade);
+}
+
+[hidden] {
+    display: none;
+}

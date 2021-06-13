@@ -1,0 +1,66 @@
+:root {
+    --col_back: #222;
+    --col_accent: #333;
+    --col_text: #eee;
+    --col_highlight: #d44;
+    --val_fade: 0.3;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
+
+html { 
+    -webkit-text-size-adjust: none;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+}
+
+body {
+    background: var(--col_back);
+    color: var(--col_text);
+    font-family: century-gothic, sans-serif;
+    font-size: xx-large;
+}
+
+.page {
+    width: 100%;
+    padding: 4rem;
+    box-sizing: border-box;
+}
+
+select {
+    -webkit-appearance: none;
+    font-family: century-gothic, sans-serif;
+    font-size: xx-large;
+    width: 23rem;
+    border-style: none;
+    border-radius: 2rem;
+    padding: 1rem 2rem;
+    text-align-last: right;
+    background-color: var(--col_text);
+}
+
+input {
+    background-color: var(--col_text);
+}
+
+figure {
+    width: 20rem;
+    height: 20rem;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+figcaption {
+    text-align: center;
+}
+
+a {
+    color: var(--col_highlight);
+}

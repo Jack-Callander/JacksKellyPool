@@ -1,0 +1,11 @@
+.panel {
+    display: none;
+}
+
+.text {
+    font-family: century-gothic, sans-serif;
+    font-size: xx-large;
+    padding: 1rem 2rem;
+    border-radius: 2.5rem;
+    width: 18rem;
+}

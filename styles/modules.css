@@ -1,0 +1,181 @@
+.container {
+    box-sizing: border-box;
+    padding: 2rem 2rem 0rem 2rem;
+    margin: 1rem 0rem;
+}
+
+.title_con {
+    color: var(--col_highlight);
+    margin: 3rem 3rem 5rem 3rem;
+}
+
+.title_el {
+    padding: 0;
+    margin: 0 0 -1rem 0;
+}
+
+.tab_con {
+    padding: 2rem 0rem 2rem 0rem;
+}
+
+.tab_el_small {
+    flex-grow: 1;
+    width: 10%;
+}
+
+.tab_el_large {
+    flex-grow: 2;
+    width: 10%;
+}
+
+.btn {
+    padding: 2rem;
+    border-radius: 2rem;
+}
+
+.option {
+    width: 100%;
+}
+
+.option_elem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    margin: 0rem 0rem 2rem 0rem;
+    height: 5rem;
+}
+
+.cb {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 2rem;
+    background-color: var(--col_text);
+}
+
+.game_elem {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0rem 0rem 2rem 0rem;
+    height: 5rem;
+}
+
+.balls_left {
+    width: 6rem;
+    height: 6rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--col_text);
+    border-radius: 3rem;
+    overflow: hidden;
+}
+
+.ball_stripe {
+    padding: 0.2rem;
+    width: 6rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--col_accent);
+    color: var(--col_text);
+}
+
+.player_name {
+    width: 20rem;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.modal_content {
+    margin: 10rem 3rem 10rem 3rem;
+    padding: 2rem 2rem 0rem 2rem;
+}
+
+.img_ball {
+    width: 9rem;
+    height: 9rem;
+    padding: 0rem;
+    margin: -0.25rem;
+    border-radius: 50%;
+}
+
+.ball_rack {
+    margin: 0rem 0rem -1.05rem 0rem;
+}
+
+.rack_spacer {
+    height: 2.5rem;
+}
+
+#show_balls_con {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.divulged_con {
+    height: 5.5rem;
+    width: 14rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.divulged_ball {
+    height: 5.5rem;
+    width: 5.5rem;
+}
+
+.table {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+    padding-bottom: 2rem;
+}
+
+.table_elem {
+    padding: 2.5rem;
+}
+
+#stats_con {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+.rotated_table_label {
+    width: 0rem;
+    overflow: visible;
+    white-space: nowrap;
+    transform: translateY(55rem) rotate(-90deg);
+}
+
+table {
+    table-layout: fixed;
+}
+
+th {
+    text-align: left;
+    height: 10rem;
+    overflow: visible;
+    white-space: nowrap;
+    transform: rotate(-45deg);
+}
+
+tr {
+    text-align: center;
+    height: 5rem;
+}

@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="language" content="english" /> 
+        <meta http-equiv="content-type" content="text/html" />
+        <meta name="author" content=”Jack Callander” />
+        <meta name="designer" content=”Jack Callander” />
+        <meta name="publisher" content=”Jack Callander” />
+        <meta name="copyright" content="Copyright 2021" />
+        <meta http-equiv="Content-Style-Type" content="text/css" />
+        <meta http-equiv="Content-Script-Type" content="text/javascript" />
+        <meta name="title" content="Jack's Kelly Pool" />
+        <meta name="viewport" content="user-scalable=0" /> 
+        <meta name="google-site-verification" content="ftqZ0XLOZAjoKIgehiAACFb1hZ3F4PC5lHLa0tu1-t4" />
+
+        <title>Jack's Kelly Pool</title>
+        <link rel="stylesheet" href="https://use.typekit.net/oov2wcw.css" />
+        <link rel="stylesheet" href="./styles/states.css" />
+        <link rel="stylesheet" href="./styles/modules.css" />
+        <link rel="stylesheet" href="./styles/layout.css" />
+        <link rel="stylesheet" href="./styles/base.css" />
+        <link rel="shortcut icon" type="image/png" href="./images/4ball.png" />
+    </head>
+    <body>
+        <div class="page centered">
+
+            <!-- TITLE : Jack's Kelly Pool -->
+
+            <div class="title_con centered">
+                <div class="title_el">Jack's</div>
+                <h1 class="title_el">KELLY POOL</h1>
+            </div>
+
+            <!-- TABS : Options, Game and Help tabs -->
+
+            <div class="tab_con container centered row fill">
+                <div id="btn_options" class="btn tab_el_small centered" checked>Options</div>
+                <div id="btn_game" class="btn tab_el_large centered" >Game</div>
+                <div id="btn_help" class="btn tab_el_small centered" >Help</div>
+            </div>
+
+            <!-- OPTIONS PANEL : Default Panel presents game settings and player settings -->
+
+            <div id="options" class="panel centered fill" checked>
+                <div id="options_con" class="container border fill" >
+                    <div class="option_elem">
+                        <div class="option_title">Player Count</div>
+                        <div class="option_data"><select id="sel_playerCount" name="Player Count"></select></div>
+                    </div>
+                    <div class="option_elem">
+                        <div class="option_title">Ball Count (Default)</div>
+                        <div class="option_data"><select id="sel_ballCount" name="Ball Count"></select></div>
+                    </div>
+                    <div class="option_elem">
+                        <div class="option_title">Show Players Remaining Ball Counts?</div>
+                        <div class="option_data"><div class="cb" id="cb_showRemainingBallCount" checked></div></div>
+                    </div>
+                    <div class="option_elem">
+                        <div class="option_title">Allow Ball Overlaps?</div>
+                        <div class="option_data"><div class="cb" id="cb_allowBallOverlaps"></div></div>
+                    </div>
+                </div>
+                <div id="player_options_con" class="container border fill" >
+                    <div class="option_elem">
+                        <input id="p1_name" class="text" value="Player 1">
+                        <div class="option_data"><select id="p1_ball_count" name="Ball Count" ></select></div>
+                    </div>
+                </div>
+                <div id="btn_newOptionsGame" class="btn centered fill" outer_type checked>Start a New Game with these Options</div>
+            </div>
+
+            <!-- GAME PANEL : Holds player table and rack tracker -->
+
+            <div id="game" class="panel centered fill">
+                <div id="game_con" class="container border fill">
+                    <div id="stats_table" class="fill table">
+                        <div class="table_elem">Adriano</div>
+                        <div class="table_elem">Bella</div>
+                        <div class="table_elem">Brendan</div>
+                        <div class="table_elem">Carlos</div>
+                        <div class="table_elem">Cristien</div>
+                        <div class="table_elem">Ethan</div>
+                        <div class="table_elem">Jack</div>
+                        <div class="table_elem">Jackson</div>
+                        <div class="table_elem">Lacey</div>
+                        <div class="table_elem">Lincoln</div>
+                        <div class="table_elem">Massy</div>
+                        <div class="table_elem">Thomas</div>
+                        <div class="table_elem">Travis</div>
+                    </div>
+                </div>
+                <div id="game_tracker_con" class="container centered border fill" hidden>
+                    <div class="ball_rack">
+                        <img id="1ball" class="img_ball" src="./images/1ball.png" value="1" />
+                    </div>
+                    <div class="ball_rack">
+                        <img id="2ball" class="img_ball" src="./images/2ball.png" value="2" />
+                        <img id="3ball" class="img_ball" src="./images/3ball.png" value="3" />
+                    </div>
+                    <div class="ball_rack">
+                        <img id="4ball" class="img_ball" src="./images/4ball.png" value="4" />
+                        <img id="5ball" class="img_ball" src="./images/5ball.png" value="5" />
+                        <img id="6ball" class="img_ball" src="./images/6ball.png" value="6" />
+                    </div>
+                    <div class="ball_rack">
+                        <img id="7ball" class="img_ball" src="./images/7ball.png" value="7" />
+                        <img id="8ball" class="img_ball" src="./images/8ball.png" value="8" />
+                        <img id="9ball" class="img_ball" src="./images/9ball.png" value="9" />
+                        <img id="10ball" class="img_ball" src="./images/10ball.png" value="10" />
+                    </div>
+                    <div class="ball_rack">
+                        <img id="11ball" class="img_ball" src="./images/11ball.png" value="11" />
+                        <img id="12ball" class="img_ball" src="./images/12ball.png" value="12" />
+                        <img id="13ball" class="img_ball" src="./images/13ball.png" value="13" />
+                        <img id="14ball" class="img_ball" src="./images/14ball.png" value="14" />
+                        <img id="15ball" class="img_ball" src="./images/15ball.png" value="15" />
+                    </div>
+                    <div class="rack_spacer"></div>
+                </div>
+                <div id="btn_newGame" class="btn centered fill" outer_type checked>New Game</div>
+            </div>
+
+            <!-- HELP PANEL : Contains help information -->
+
+            <div id="help" class="panel centered fill">
+                <div id="help_con" class="container border fill" style="padding: 2rem">
+                    <h2>Original Kelly Pool</h2> <br />
+                    Each player is assigned 1 ball which is kept secret from the other players. The goal of each player is to
+                    legally pocket their own ball. Check out the rules on Wikipedia
+                    <a href="https://en.wikipedia.org/wiki/Kelly_pool#Gameplay">here.</a>
+                    <br /> <br />
+                    To play Kelly Pool here, go to the <b>Options</b> tab and set your desired <b>Player Count</b>. Change the
+                    <b>Ball Count (Default)</b> to <b>1 Ball</b> and ensure <b>Allow Ball Overlaps?</b> is unchecked. Press the
+                    button at the bottom of the page to start a new game. Now use the <b>SHOW</b> buttons to allow each player to
+                    view their ball. Enjoy!
+
+                    <br /> <br />
+                    <h2>Jack's Kelly Pool</h2> <br />
+                    Much more accommodating for lower skill levels - each player is assigned N secret ball(s) and must keep their
+                    own balls on the table. If a player has no balls left on the table, they are eliminated. If a player is the
+                    only one with balls left on the table they are the winner. Like pool, players take turns shooting and if they
+                    pocket a ball, they get another shot.
+                    <br /><br />
+                    To play Jack's Kelly Pool, go to the <b>Options</b> tab and set your desired <b>Player Count</b>. Change the
+                    <b>Ball Count (Default)</b> to the desired amount of balls each player should start with. Players can be
+                    assigned extra balls or less balls to even out the skill level by adjusting the Dropdown to the right of their
+                    names. Press the button at the bottom of the page to begin a new game!
+                    <br /><br />
+                    Now go to the table and rack the balls as shown on the <b>Game</b> page. Each ball can be pressed to mark it
+                    as pocketed, this allows you to check if a player is out, or how many balls they have left without knowing
+                    their balls. The grey ball to the left of each players name on the <b>Game</b> page will show the remaining
+                    ball count of each player, and will glow red when the player is eliminated.
+                    <br /><br />
+                    My mates play winner breaks (over multiple rounds), and make the winner go down a ball in the ball menu to
+                    make it more difficult for them. The player who was eliminated first goes up a ball in the ball menu to make
+                    it easier for them. <br /> <br />
+
+                    <h2>Subtleties</h2> <br />
+                    <b>Divulged Balls</b> - A ball that every player is aware of. If a player is good enough to win with only 1
+                    Ball, they may be demoted to 2 Balls that are no longer secret to the other players.
+                    <br /><br />
+                    <b>Show Players Remaining Ball Counts</b> - This controls the number inside the grey ball to the left of each
+                    players name on the <b>Game</b> page. If this option is unchecked, this number will turn into a <b>?</b>
+                    <br /><br />
+                    <b>Allow Ball Overlaps?</b> - This can create some interesting gameplay and allow for multiple winners. If
+                    this option is checked, it is possible for one player to share a ball with another without knowing.
+                    <br /><br />
+                    <b>Naming Players</b> - Players can be given names other than <b>Player 1</b>, <b>Player 2</b>... Simply type
+                    in their name over the existing one in the <b>Options</b> page.
+                    <br /><br />
+                    <b>SHOW Buttons</b> - The <b>SHOW</b> buttons on the game page keep a count of how many times they are
+                    pressed. This allows players to ensure no one has checked their balls. <br /> <br />
+
+                    <h2>Credit</h2>
+                    Cheers Travis, Thomas, Edward, Brendan, Richard, Ethan, Lyam, Bella, James, Carlos, Jackson, Aisha and Massi
+                    for inspiration and playtesting! <br /> <br/>
+                    Version 2 created on the 3rd of May 2021. Last Updated 14th of July 2021. Currently Version 2.2
+                </div>
+
+                <!-- CHANGE LOG : Contains info about historical versions -->
+
+                <div id="changelog_con" class="container border fill" style="padding: 2rem">
+                    <h2>Change Log</h2> <br />
+                    <b>Version 0.1</b> <br />
+                    <p>
+                    Version 0.1 was a simple random number generator. 1 to 15, overlaps occurred all the time. It was written in
+                    Python and was entirely on the console. Players pressed the <b>Enter</b> key to scroll the console down revealing
+                    their balls, then again to scroll past them.
+                    </p><br />
+                    <b>Version 0.2</b> <br />
+                    <p>
+                    Version 0.2 added player names to allow easier tracking of who was who. It also allowed choice of the amount of
+                    balls assigned to each player and did not permit overlaps. Assigning different ball amounts to each player was not
+                    yet possible and players forgetting their balls became a problem.
+                    </p><br />
+                    <b>Version 1.0</b> <br />
+                    <p>
+                    Version 1.0 shifted to JavaScript and ran from a single HTML file. This allowed the file to be passed around,
+                    shared and stored easily on portable android devices. A simple graphical user interface was a nice feature of the
+                    app running on a browser, allowing players to easily navigate the settings and features. It also allowed players
+                    to memorise their balls much more easily because a picture of their balls was shown to them instead of just a
+                    number. For less experienced pool players, it's annoying to have to find your balls on the table to see what they
+                    look like. Descriptions of the balls were also added, addressing which balls are stripes and which are solids, as
+                    well as what colours they can be. For example, the 4 and 12 balls can be purple or pink. The app was also fairly
+                    intuitive, requiring only the knowledge of rules to take advantage of its features. These new features included:
+                    <ul>
+                        <li>A user could choose to play with one to fifteen players.</li>
+                        <li>A user could set a default ball count (the number of balls each player is assigned, by default).</li>
+                        <li>
+                            A Player could change their name (from Player x to something more interesting and easier to remember).
+                        </li>
+                        <li>A user could choose to give a specific player a different ball count to other players.</li>
+                        <li>
+                            All these settings would be saved while the page was open, allowing many games to be played in a row
+                            without having to set up games from scratch.
+                        </li>
+                        <li>
+                            When a game was started, players could take turns memorising their balls. To ensure a player didn't check
+                            another players balls, accidentally or not, players could only reveal balls from top to bottom until
+                            everyone had checked. After this, any player at any time could re-check their balls.
+                        </li>
+                        <li>
+                            A <b>Lock</b> button was added to help prevent accidental changes to the settings during a game.
+                        </li>
+                    </ul>
+                    </p><br />
+                    <b>Version 1.1</b> <br />
+                    <p>
+                    Version 1.1 added an alert when a user refreshed the page to ensure they wanted to do so. This stopped
+                    accidental refreshes from resetting the game and all the settings. It also added a counter to the <b>Reveal</b>
+                    buttons. The ones which allow a player to check their balls. This way each player knows how many times they have
+                    checked their balls and would be able to tell if someone else had checked them. Version 1.1 also introduced some
+                    step-by-step instructions on how to use the app.
+                    </p><br />
+                    <b>Version 1.2</b> <br />
+                    <p>
+                    Version 1.2 addressed some friendly problems with cheating... players could continue playing if they were
+                    eliminated from the game and the other players would not be able to tell. For this, an optional
+                    <b>Game Tracker</b> was added. The <b>Game Tracker</b> showed all the balls in a grid and if a ball was pressed,
+                    it would be greyed out, representing a ball that had been pocketed. The goal was to keep the Game Tracker
+                    accurately reflecting the game being played on the table. If a players balls had all been pocketed, their name
+                    would turn red, revealing to everyone that they were eliminated. This did raise an issue where a player could now
+                    check another players balls through the <b>Game Tracker</b> through trial and error and learn another players
+                    balls without affecting the <b>Reveal</b> counter.
+                    </p><br />
+                    <b>Version 1.2.1</b> <br />
+                    <p>
+                    Version 1.2.1 stored each player's name so that when the player count was changed, the names would not be reset.
+                    It was tedious typing everyone's names in, so this was a nice feature.
+                    </p><br />
+                    <b>Version 2.0</b> <br />
+                    <p>
+                    Version 2.0 was the first published on the internet. This allowed anyone to access it from anywhere at any time, a
+                    huge convenience boost. It also allowed Apple/iOS devices to run the JavaScript that runs the app, so this was the
+                    first version to support all devices. Another huge change was a complete rehaul of all the code, as well as a
+                    completely new graphical user interface. This was a much nicer looking design with a dark colour theme. It also
+                    introduced pagination, separating the settings from the game itself, and moving the rules to a new page. This was
+                    the first version that went by <b>Jack's Kelly Pool</b> and it introduced some new game options:
+                    <ul>
+                        <li>A user can easily see how many balls each player has left on the table.</li>
+                        <li>A user can choose to allow ball overlaps.</li>
+                        <li>Divulged balls are now a built-in option.</li>
+                    </ul>
+                    The pagination also improved the organisation of the game, all options could be set up in one place and a game
+                    with the current options could easily be started from either the options or game page. The <b>Game</b> tab was
+                    much less packed without the options providing a nicer user experience. The <b>Game Tracker</b> was transformed
+                    from a grid into a triangle to accurately represent the way you rack the balls in <b>Jack's Kelly Pool</b>. This
+                    clearly shows the players which balls can start at a disadvantage and which balls are good to have, without the
+                    player having to rack the balls on the table or imagine a rack in their head. For example, the 1, 2, 3, 11 and 15
+                    balls have a lot of movement, or usually head towards a pocket on the break, whereas the 5, 8 and 9 can stay in a
+                    cluster depending on how good the break is. The 8 ball is quite good to have because it both starts in the middle
+                    of the rack and, subconsciously, no one really wants to pocket it.
+                    </p><br />
+                    <b>Version 2.1</b> <br />
+                    <p>
+                    Version 2.1 started to use a browsers local storage to store game settings and player names. This way if the app
+                    was closed and not used for a while, and was then revisited on the same device, all settings and player names from
+                    the previous session were loaded back in, saving some time and inconvenience. Also, the way divulged balls worked
+                    was changed, instead of each player being "allowed" to check a divulged players balls at any time, that players
+                    <b>Show</b> button was replaced with pictures of the balls themselves. This way a player only had to glance at the
+                    game page in order to check. This way helped better explain what divulged balls are in the game to new players.
+                    This version also addressed and fixed a few issues from the previous version:
+                    <ul>
+                        <li>
+                            If the option for showing a players remaining ball counts was changed during the play of a game, some
+                            strange things could happen.
+                        </li>
+                        <li>Apple/Safari devices had an unappealing style on the dropdown menus.</li>
+                        <li>Apple/Safari devices added a delay on their button presses making the app appear slow.</li>
+                    </ul>
+                    Finally, a proper help page was written up going briefly over the rules. Also when an eliminated player wanted to
+                    check everyone's balls it was hard to work out which of those were still on the table, so now balls that are
+                    pocketed are greyed out on the <b>Reveal</b> screen.
+                    </p><br />
+                    <b>Version 2.1.1</b> <br />
+                    <p>
+                    Added this <b>Change Log</b>.
+                    </p><br />
+                    <b>Version 2.2</b> <br />
+                    <p>
+                    Refactored the spaghetti using a Model-View-Controller approach, specifically this one 
+                    <a href="https://hackernoon.com/writing-a-simple-mvc-model-view-controller-app-in-vanilla-javascript-u65i34lx">
+                        here.
+                    </a>
+                    Also cleaned up the CSS slightly by attempting the SMACSS architecture. <b>Source code</b> is now in Git! Have
+                    a look if you want to <a href="">here.</a> <br />
+
+                    Player stats are now a thing. These are saved by name and are specific to the device they were created as this is
+                    a static web app. Press on a players name in the <b>Game</b> tab to see their statistics. Also submit a winner at
+                    the end of each round for the stats to update.
+                    
+                    </p>
+                </div>
+            </div>
+
+            <!-- CONTENT HERE ON ALL PAGES -->
+
+        </div>
+
+        <!-- PAGE MODALS : Queries and Alerts go here, as well as the ball check modal -->
+
+        <div id="modal_newGame" class="modal">
+            <div class="container centered border modal_content">
+                Are you sure you want to start a new game?
+                <div id="btn_startNewGame" class="btn centered fill" outer_type checked>Yes, begin a new game</div>
+                <div id="btn_cancelNewGame" class="btn centered fill" outer_type checked>No thanks</div>
+            </div>
+        </div>
+
+        <div id="modal_balls" class="modal">
+            <div class="container centered border modal_content">
+                <div id="show_balls_con">
+                    <figure id="ball1" class="ballfig"><img src="./images/1ball.png" id="1ball" class="ballimg ballimg1" /><figcaption>1 Ball | Yellow | Solid</figcaption></figure>
+                    <figure id="ball2" class="ballfig"><img src="./images/2ball.png" id="2ball" class="ballimg ballimg2" /><figcaption>2 Ball | Blue | Solid</figcaption></figure>
+                    <figure id="ball3" class="ballfig"><img src="./images/3ball.png" id="3ball" class="ballimg ballimg3" /><figcaption>3 Ball | Red | Solid</figcaption></figure>
+                    <figure id="ball4" class="ballfig"><img src="./images/4ball.png" id="4ball" class="ballimg ballimg4" /><figcaption>4 Ball | Pink or Purple | Solid</figcaption></figure>
+                    <figure id="ball5" class="ballfig"><img src="./images/5ball.png" id="5ball" class="ballimg ballimg5" /><figcaption>5 Ball | Orange | Solid</figcaption></figure>
+                    <figure id="ball6" class="ballfig"><img src="./images/6ball.png" id="6ball" class="ballimg ballimg6" /><figcaption>6 Ball | Green | Solid</figcaption></figure>
+                    <figure id="ball7" class="ballfig"><img src="./images/7ball.png" id="7ball" class="ballimg ballimg7" /><figcaption>7 Ball | Brown | Solid</figcaption></figure>
+                    <figure id="ball8" class="ballfig"><img src="./images/8ball.png" id="8ball" class="ballimg ballimg8" /><figcaption>8 Ball | Black | Solid</figcaption></figure>
+                    <figure id="ball9" class="ballfig"><img src="./images/9ball.png" id="9ball" class="ballimg ballimg9" /><figcaption>9 Ball | Yellow | Stripe</figcaption></figure>
+                    <figure id="ball10" class="ballfig"><img src="./images/10ball.png" id="10ball" class="ballimg ballimg10" /><figcaption>10 Ball | Blue | Stripe</figcaption></figure>
+                    <figure id="ball11" class="ballfig"><img src="./images/11ball.png" id="11ball" class="ballimg ballimg11" /><figcaption>11 Ball | Red | Stripe</figcaption></figure>
+                    <figure id="ball12" class="ballfig"><img src="./images/12ball.png" id="12ball" class="ballimg ballimg12" /><figcaption>12 Ball | Pink or Purple | Stripe</figcaption></figure>
+                    <figure id="ball13" class="ballfig"><img src="./images/13ball.png" id="13ball" class="ballimg ballimg13" /><figcaption>13 Ball | Orange | Stripe</figcaption></figure>
+                    <figure id="ball14" class="ballfig"><img src="./images/14ball.png" id="14ball" class="ballimg ballimg14" /><figcaption>14 Ball | Green | Stripe</figcaption></figure>
+                    <figure id="ball15" class="ballfig"><img src="./images/15ball.png" id="15ball" class="ballimg ballimg15" /><figcaption>15 Ball | Brown | Stripe</figcaption></figure>
+                </div>
+                <div id="btn_closeBalls" class="btn centered fill" outer_type checked>Okay, Close</div>
+            </div>
+        </div>
+
+        <div id="modal_error" class="modal">
+            <div class="container centered border modal_content">
+                <div id="error_text" class="error"></div>
+                <div id="btn_closeError" class="btn centered fill" outer_type checked>Close</div>
+            </div>
+        </div>
+
+        <div id="modal_winner" class="modal">
+            <div class="container centered border modal_content">
+                Who was the winner?<br /><br />
+                <select id="sel_whoWon" class="centered fill" name="Who Won?"></select>
+                <div id="btn_finish" class="btn centered fill" outer_type checked highlighted>Finish</div>
+                <div id="btn_cancelFinish" class="btn centered fill" outer_type checked>Cancel</div>
+            </div>
+        </div>
+
+        <div id="modal_stats" class="modal">
+            <div class="container centered border modal_content">
+                Jack's Stats (Win Percentage)
+                <div id="stats_con" class="container fill">
+                    <div class="rotated_table_label"><b>Against this many other players</b></div>
+                    <table style="width: 100%;">
+                        <tbody>
+                        <tr>
+                            <th>Against</th>
+                            <th>1 Divulged</th>
+                            <th>2 Divulged</th>
+                            <th>1 Ball</th>
+                            <th>2 Balls</th>
+                            <th>3 Balls</th>
+                            <th>4 Balls</th>
+                        </tr>
+                        <tr id="str1"><td><b>1</b></td></tr>
+                        <tr id="str2"><td><b>2</b></td></tr>
+                        <tr id="str3"><td><b>3</b></td></tr>
+                        <tr id="str4"><td><b>4</b></td></tr>
+                        <tr id="str5"><td><b>5</b></td></tr>
+                        <tr id="str6"><td><b>6</b></td></tr>
+                        <tr id="str7"><td><b>7</b></td></tr>
+                        <tr id="str8"><td><b>8</b></td></tr>
+                        <tr id="str9"><td><b>9</b></td></tr>
+                        <tr id="str10"><td><b>10</b></td></tr>
+                        <tr id="str11"><td><b>11</b></td></tr>
+                        <tr id="str12"><td><b>12</b></td></tr>
+                        <tr id="str13"><td><b>13</b></td></tr>
+                        <tr id="str14"><td><b>14</b></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="btn_closeStats" class="btn centered fill" outer_type checked>Close</div>
+                <div id="btn_deletePlayer" class="btn centered fill" outer_type checked highlighted>Delete Player (Not Implemented Yet)</div>
+            </div>
+        </div>
+    </body>
+
+    <!-- Import code -->
+    <script src="./scripts/_FrontEnd.js"></script>
+    <script type="module" src="./scripts/App.js"></script>
+</html>
