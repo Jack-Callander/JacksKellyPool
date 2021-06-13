@@ -39,6 +39,7 @@ class View {
         this.btn_finish_game = document.getElementById("btn_finish");
         this.btn_cancel_finish_game = document.getElementById("btn_cancelFinish");
 
+        this.lbl_stats_title = document.getElementById("stats_title");
         this.btn_close_stats = document.getElementById("btn_closeStats");
         this.btn_delete_player = document.getElementById("btn_deletePlayer");
 
@@ -330,6 +331,8 @@ class View {
     }
 
     ShowStats(player_stats) {
+        this.lbl_stats_title.innerText = `${player_stats.name}'s Stats (Win Percentage)`;
+
         for (let i = 0; i < 14; i++) {
             const stat_table_row = document.getElementById(`str${i + 1}`);
             let row_header = stat_table_row.childNodes[0];
