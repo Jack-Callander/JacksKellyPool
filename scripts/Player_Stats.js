@@ -36,6 +36,7 @@ class Player_Stats {
 
     _AddStat(player_count, ball_count, stat_char) {
         if (player_count <= 1) return;
+        if (ball_count > 4) return;
         if (!this.divulged) ball_count += 2;
 
         let queue = this._game_past[player_count - 2][ball_count - 1];
