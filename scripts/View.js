@@ -220,7 +220,7 @@ class View {
 
     _RenderGameTable({is_game_in_progress, initial_balls_list}) {
         if (!is_game_in_progress) {
-            this.RefreshStatsTable();
+            this.RefreshStatsTable(is_game_in_progress);
         } else {
             const players_options = this._GetOptionsTable();
             this.con_players_game.innerHTML = "";
@@ -292,7 +292,8 @@ class View {
         }
     }
 
-    RefreshStatsTable() {
+    RefreshStatsTable(is_game_in_progress) {
+        if (is_game_in_progress) return;
         this.con_players_game.innerHTML = "";
         let player_names = localStorage.getItem("player_names_list");
         if (player_names === null) {

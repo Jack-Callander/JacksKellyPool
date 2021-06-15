@@ -86,12 +86,17 @@ class Model {
     }
 
     DeletePlayerStats(name) {
-        let player_names = localStorage.getItem("player_names_list").split(";");
-        player_names.splice(player_names.indexOf(name), 1);
+        let names = [];
+        this._players.forEach(player => { names.push(player.name); });
+        const player_index = names.indexOf(name);
 
-        localStorage.setItem("player_names_list", player_names.join(";"));
-        localStorage.removeItem(`player_stat_${name}`);
-        this.responseDeleteStats.trigger();
+        if (this._is_game_in_progress && player_index !== -1) {
+            this._players[player_index].DeleteStats();
+        } else {
+            const player = new Player({name: name, ball_count: 0, divulged: false});
+            player.DeleteStats();
+        }
+        this.responseDeleteStats.trigger(this._is_game_in_progress);
     }
 
     _AssignBalls(do_allow_ball_overlaps) {
@@ -174,7 +179,7 @@ class Model {
         return valid;
     }
 
-    get is_game_in_progress() { return this._is_game_in_progress(); }
+    get is_game_in_progress() { return this._is_game_in_progress; }
 }
 
 export default Model;

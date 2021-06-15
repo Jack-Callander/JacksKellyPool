@@ -34,6 +34,14 @@ class Player_Stats {
         this._AddStat(player_count, ball_count, "l");
     }
 
+    DeleteStats() {
+        let player_names = localStorage.getItem("player_names_list").split(";");
+        player_names.splice(player_names.indexOf(this.name), 1);
+
+        localStorage.setItem("player_names_list", player_names.join(";"));
+        localStorage.removeItem(`player_stat_${this.name}`);
+    }
+
     _AddStat(player_count, ball_count, stat_char) {
         if (player_count <= 1) return;
         if (ball_count > 4) return;

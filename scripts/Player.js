@@ -6,6 +6,7 @@ class Player {
         this._number_of_balls_assigned = ball_count;
         this._number_of_balls_remaining = ball_count;
         this._balls = [];
+        this._divulged = divulged;
 
         this._stats = new Player_Stats(name, divulged);
     }
@@ -30,6 +31,11 @@ class Player {
             if (current_rack.includes(ball)) count_balls_left++;
         });
         this._number_of_balls_remaining = count_balls_left;
+    }
+
+    DeleteStats() {
+        this._stats.DeleteStats();
+        this._stats = new Player_Stats(this._name, this._divulged);
     }
 
     get name() { return this._name; }

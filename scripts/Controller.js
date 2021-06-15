@@ -19,7 +19,7 @@ class Controller {
         this._model.invalidPlayerNamesEvent.addListener(e => { this._view.ShowError(e); });
         this._model.invalidBallCountEvent.addListener(e => { this._view.ShowError(e); });
         this._model.responsePlayerStats.addListener(e => { this._view.ShowStats(e); });
-        this._model.responseDeleteStats.addListener(() => { this._view.RefreshStatsTable(); });
+        this._model.responseDeleteStats.addListener(e => { this._view.RefreshStatsTable(e); });
 
 
 
