@@ -123,6 +123,7 @@
 #show_balls_con {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 .divulged_con {
