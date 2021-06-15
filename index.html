@@ -86,23 +86,8 @@
             <!-- GAME PANEL : Holds player table and rack tracker -->
 
             <div id="game" class="panel centered fill">
-                <div id="game_con" class="container border fill">
-                    <div id="stats_table" class="fill table">
-                        <div class="table_elem">Adriano</div>
-                        <div class="table_elem">Bella</div>
-                        <div class="table_elem">Brendan</div>
-                        <div class="table_elem">Carlos</div>
-                        <div class="table_elem">Cristien</div>
-                        <div class="table_elem">Ethan</div>
-                        <div class="table_elem">Jack</div>
-                        <div class="table_elem">Jackson</div>
-                        <div class="table_elem">Lacey</div>
-                        <div class="table_elem">Lincoln</div>
-                        <div class="table_elem">Massy</div>
-                        <div class="table_elem">Thomas</div>
-                        <div class="table_elem">Travis</div>
-                    </div>
-                </div>
+                <div id="game_con" class="container border fill"></div>
+
                 <div id="game_tracker_con" class="container centered border fill" hidden>
                     <div class="ball_rack">
                         <img id="1ball" class="img_ball" src="./images/1ball.png" value="1" />
@@ -392,7 +377,7 @@
 
         <div id="modal_stats" class="modal">
             <div class="container centered border modal_content">
-                <div id="stats_title">Jack's Stats (Win Percentage)</div>
+                <div id="stats_title" name="Player">Player's Stats (Win Percentage)</div>
                 <div id="stats_con" class="container fill">
                     <div class="rotated_table_label"><b>Against this many other players</b></div>
                     <table style="width: 100%;">
@@ -424,7 +409,16 @@
                     </table>
                 </div>
                 <div id="btn_closeStats" class="btn centered fill" outer_type checked>Close</div>
-                <div id="btn_deletePlayer" class="btn centered fill" outer_type checked highlighted>Delete Player (Not Implemented Yet)</div>
+                <div id="btn_deletePlayer" class="btn centered fill" outer_type checked highlighted>Delete Player</div>
+            </div>
+        </div>
+
+        <div id="modal_delete" class="modal">
+            <div class="container centered border modal_content">
+                Type out the name of the player to confirm delete<br /><br />
+                <input id="delete_confirm_name" class="text" value="" />
+                <div id="btn_confirm_delete" class="btn centered fill" outer_type checked highlighted hidden>Delete Player</div>
+                <div id="btn_cancel_delete" class="btn centered fill" outer_type checked>Cancel</div>
             </div>
         </div>
     </body>

@@ -34,6 +34,7 @@ class View {
         this.mod_error = document.getElementById("modal_error");
         this.mod_winner = document.getElementById("modal_winner");
         this.mod_stats = document.getElementById("modal_stats");
+        this.mod_delete_stats = document.getElementById("modal_delete");
 
         this.sel_winning_player = document.getElementById("sel_whoWon");
         this.btn_finish_game = document.getElementById("btn_finish");
@@ -42,6 +43,10 @@ class View {
         this.lbl_stats_title = document.getElementById("stats_title");
         this.btn_close_stats = document.getElementById("btn_closeStats");
         this.btn_delete_player = document.getElementById("btn_deletePlayer");
+
+        this.tbx_confirm_name = document.getElementById("delete_confirm_name");
+        this.btn_confirm_delete_player = document.getElementById("btn_confirm_delete");
+        this.btn_cancel_delete_player = document.getElementById("btn_cancel_delete");
 
         this.err_message = document.getElementById("error_text");
         this.btn_close_error = document.getElementById("btn_closeError");
@@ -66,6 +71,7 @@ class View {
         this.pocketBallEvent = new Event();
         this.undoPocketBallEvent = new Event();
         this.requestPlayerStats = new Event();
+        this.requestDeleteStats = new Event();
 
         this._RenderOptions();
         this._AssignEvents();
@@ -142,6 +148,28 @@ class View {
         this.btn_close_error.addEventListener("click", () => { this.mod_error.style.display = "none"; });
         this.btn_finish_game.addEventListener("click", () => { this._EndGame(); this.mod_winner.style.display = "none"; });
         this.btn_cancel_finish_game.addEventListener("click", () => { this.mod_winner.style.display = "none"; });
+
+        this.btn_delete_player.addEventListener("click", () => {
+            this.mod_stats.style.display = "none";
+            this.mod_delete_stats.style.display = "block";
+        });
+
+        this.tbx_confirm_name.addEventListener("change", () => { 
+            if (this.tbx_confirm_name.value === this.lbl_stats_title.getAttribute("name"))
+                this.btn_confirm_delete_player.removeAttribute("hidden");
+            else
+                this.btn_confirm_delete_player.setAttribute("hidden", "");
+        });
+
+        this.btn_cancel_delete_player.addEventListener("click", () => {
+            this.mod_delete_stats.style.display = "none";
+            this.mod_stats.style.display = "block";
+        });
+
+        this.btn_confirm_delete_player.addEventListener("click", () => {
+            this.requestDeleteStats.trigger(this.tbx_confirm_name.value);
+            this.mod_delete_stats.style.display = "none";
+        });
     }
 
     _RenderPlayerOptionsTable() {
@@ -332,6 +360,7 @@ class View {
 
     ShowStats(player_stats) {
         this.lbl_stats_title.innerText = `${player_stats.name}'s Stats (Win Percentage)`;
+        this.lbl_stats_title.setAttribute("name", player_stats.name);
 
         for (let i = 0; i < 14; i++) {
             const stat_table_row = document.getElementById(`str${i + 1}`);
