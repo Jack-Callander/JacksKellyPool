@@ -38,7 +38,7 @@ class Player_Stats {
         let player_names = localStorage.getItem("player_names_list").split(";");
         player_names.splice(player_names.indexOf(this.name), 1);
 
-        localStorage.setItem("player_names_list", player_names.join(";") + ";");
+        localStorage.setItem("player_names_list", player_names.join(";"));
         localStorage.removeItem(`player_stat_${this.name}`);
     }
 
