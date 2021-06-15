@@ -151,6 +151,8 @@ class View {
 
         this.btn_delete_player.addEventListener("click", () => {
             this.mod_stats.style.display = "none";
+            this.tbx_confirm_name.value = "";
+            this.btn_confirm_delete_player.setAttribute("hidden", "");
             this.mod_delete_stats.style.display = "block";
         });
 

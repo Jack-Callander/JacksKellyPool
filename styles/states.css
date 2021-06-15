@@ -82,6 +82,11 @@ figure[checked] {
     opacity: var(--val_fade);
 }
 
+.text[delete_type] {
+    width: 36rem;
+    text-align: center;
+}
+
 [hidden] {
     display: none;
 }
