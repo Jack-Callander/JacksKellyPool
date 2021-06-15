@@ -11,7 +11,10 @@ class Player {
     }
 
     AddBall(ball) {
-        this._balls.push(ball);
+        let i = 0;
+        while (i < this._balls.length && this._balls[i] < ball) i++;
+        // Insert maintaining a sorted array
+        this._balls.splice(i, 0, ball);
     }
 
     AddGame(player_count, was_the_winner) {
