@@ -34,6 +34,7 @@ class View {
         this.mod_error = document.getElementById("modal_error");
         this.mod_winner = document.getElementById("modal_winner");
         this.mod_stats = document.getElementById("modal_stats");
+        this.mod_loading = document.getElementById("modal_loading");
 
         this.sel_winning_player = document.getElementById("sel_whoWon");
         this.btn_finish_game = document.getElementById("btn_finish");
@@ -71,6 +72,7 @@ class View {
         this._AssignEvents();
         this._RenderPlayerOptionsTable();
         this._RenderGameTable({is_game_in_progress: false});
+        this.mod_loading.style.display = "none";
     }
 
     _RenderOptions() {
