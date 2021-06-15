@@ -11,6 +11,7 @@ class Controller {
         this._view.pocketBallEvent.addListener(e => { this._model.PocketBall(e); });
         this._view.undoPocketBallEvent.addListener(e => { this._model.UndoPocketBall(e); });
         this._view.requestPlayerStats.addListener(e => { this._model.GetPlayerStats(e); });
+        this._view.requestDeleteStats.addListener(e => { this._model.DeletePlayerStats(e); });
 
         this._model.gameStartedEvent.addListener(e => { this._view.ToggleNewGame(e); });
         this._model.gameEndedEvent.addListener(e => { this._view.ToggleNewGame(e); });
@@ -18,6 +19,7 @@ class Controller {
         this._model.invalidPlayerNamesEvent.addListener(e => { this._view.ShowError(e); });
         this._model.invalidBallCountEvent.addListener(e => { this._view.ShowError(e); });
         this._model.responsePlayerStats.addListener(e => { this._view.ShowStats(e); });
+        this._model.responseDeleteStats.addListener(() => { this._view.RefreshStatsTable(); });
 
 
 

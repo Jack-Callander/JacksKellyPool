@@ -217,9 +217,11 @@ class View {
     }
 
     _RenderGameTable({is_game_in_progress, initial_balls_list}) {
-        this.con_players_game.innerHTML = "";
-        const players_options = this._GetOptionsTable();
-        if (is_game_in_progress) {
+        if (!is_game_in_progress) {
+            this.RefreshStatsTable();
+        } else {
+            const players_options = this._GetOptionsTable();
+            this.con_players_game.innerHTML = "";
             for (let i = 0; i < (parseInt(this.opt_player_count.value) + 1); i++) {
 
                 if (initial_balls_list[i].balls.length === 0) continue;
@@ -285,31 +287,33 @@ class View {
 
                 this.con_players_game.appendChild(row_element);
             }
+        }
+    }
+
+    RefreshStatsTable() {
+        this.con_players_game.innerHTML = "";
+        let player_names = localStorage.getItem("player_names_list");
+        if (player_names === null) {
+            // TODO
         } else {
-            let player_names = localStorage.getItem("player_names_list");
-            if (player_names === null) {
-                // TODO
-            } else {
-                player_names = player_names.split(";");
-                player_names.length--;
+            player_names = player_names.split(";");
+            player_names.length--;
 
-                const stats_table = document.createElement("div");
-                stats_table.setAttribute("class", "fill table");
-                stats_table.setAttribute("id", "stats_table");
+            const stats_table = document.createElement("div");
+            stats_table.setAttribute("class", "fill table");
+            stats_table.setAttribute("id", "stats_table");
 
-                player_names.sort();
-                player_names.forEach(name => {
-                    const table_element = document.createElement("div");
-                    table_element.setAttribute("class", "table_elem");
-                    table_element.innerText = name;
-                    table_element.addEventListener("click", () => { this.requestPlayerStats.trigger({name: name}); });
+            player_names.sort();
+            player_names.forEach(name => {
+                const table_element = document.createElement("div");
+                table_element.setAttribute("class", "table_elem");
+                table_element.innerText = name;
+                table_element.addEventListener("click", () => { this.requestPlayerStats.trigger({name: name}); });
 
-                    stats_table.appendChild(table_element);
-                });
+                stats_table.appendChild(table_element);
+            });
 
-                this.con_players_game.appendChild(stats_table);
-            }
-            
+            this.con_players_game.appendChild(stats_table);
         }
     }
 

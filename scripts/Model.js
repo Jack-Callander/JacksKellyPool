@@ -21,6 +21,7 @@ class Model {
         this.invalidBallCountEvent = new Event();
         this.invalidPlayerNamesEvent = new Event();
         this.responsePlayerStats = new Event();
+        this.responseDeleteStats = new Event();
     }
 
     StartGame({player_names, ball_counts, divulged_list, do_allow_ball_overlaps}) {
@@ -82,6 +83,15 @@ class Model {
     GetPlayerStats({name: name}) {
         const player = new Player({name: name, ball_count: 0, divulged: false});
         this.responsePlayerStats.trigger(player.stats);
+    }
+
+    DeletePlayerStats(name) {
+        let player_names = localStorage.getItem("player_names_list").split(";");
+        player_names.splice(player_names.indexOf(name), 1);
+
+        localStorage.setItem("player_names_list", player_names.join(";"));
+        localStorage.removeItem(`player_stat_${name}`);
+        this.responseDeleteStats.trigger();
     }
 
     _AssignBalls(do_allow_ball_overlaps) {
