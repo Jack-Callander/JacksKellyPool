@@ -54,6 +54,10 @@
     display: flex;
 }
 
+.modal[loading_type] {
+    background-color: var(--col_back);
+}
+
 .ball_stripe[checked] {
     background-color: var(--col_highlight);
 }
