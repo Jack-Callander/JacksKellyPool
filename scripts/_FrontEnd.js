@@ -1,4 +1,9 @@
-// Don't Refresh
+// Remove loading screen
+window.onload = function() {
+    document.getElementById("modal_loading").style.display = "none";
+}
+
+// Prevent accidental refresh
 window.onbeforeunload = function() {
     return "Are you sure you want to leave/reload?";
 }
