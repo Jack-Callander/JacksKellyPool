@@ -10,6 +10,7 @@ class View {
         this.btn_game = document.getElementById("btn_game");
         this.btn_help = document.getElementById("btn_help");
 
+        this.btn_sort = document.getElementById("btn_sort");
         this.btn_new_game_options = document.getElementById("btn_newOptionsGame");
         this.btn_new_game = document.getElementById("btn_newGame");
         this.btn_start_new_game = document.getElementById("btn_startNewGame");
@@ -120,6 +121,7 @@ class View {
         this.opt_show_remaining.addEventListener("click", () => { this._CheckElement(this.opt_show_remaining, null); this._SaveOptions(); });
         this.opt_allow_overlaps.addEventListener("click", () => { this._CheckElement(this.opt_allow_overlaps, null); this._SaveOptions(); });
         
+        this.btn_sort.addEventListener("click", () => { this._SortPlayerOptionsTable(); });
         this.btn_new_game.addEventListener("click", () => { this._RequestStartOrEndGame(); });
         this.btn_new_game_options.addEventListener("click", () => { this._RequestStartOrEndGame(); });
         this.btn_start_new_game.addEventListener("click", () => { this._TriggerNewGame(); this._ChangeTabs("game"); this.mod_new_game.style.display = "none"; });
@@ -452,6 +454,15 @@ class View {
         return players_options;
     }
 
+    _SetOptionsTable(player_options) {
+        let i = 1;
+        player_options.forEach(player => {
+            document.getElementById(`p${i}_name`).value = player.name;
+            document.getElementById(`p${i}_ball_count`).value = player.ball_index;
+            i++;
+        });
+    }
+
     _SavePlayerOptionsTable() {
         let player_names = [];
         let ball_indicies = [];
@@ -461,6 +472,20 @@ class View {
         });
         localStorage.setItem("options_table_player_names", player_names.join(";"));
         localStorage.setItem("options_table_ball_indicies", ball_indicies.join(";"));
+    }
+
+    _SortPlayerOptionsTable() {
+        let options_table = [];
+        const full_table = this._GetOptionsTable();
+
+        let i = 0;
+        while (i < this.opt_player_count.selectedIndex + 1) {
+            options_table.push(full_table[i++]);
+        }
+
+        options_table.sort((a, b) => { return a.name < b.name ? -1 : 1; });
+        this._SetOptionsTable(options_table);
+        this._SavePlayerOptionsTable();
     }
 
     _SaveOptions() {
