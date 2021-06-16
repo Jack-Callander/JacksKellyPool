@@ -57,6 +57,7 @@ class View {
             this.rack.push(document.getElementById(`${i}ball`));
             this.balls.push(document.getElementById(`ball${i}`));
         }
+        this.players_still_in = [];
 
         this.player_count_options = [
             1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15
@@ -334,7 +335,9 @@ class View {
                 this._PopulateSelect(this.sel_winning_player, ["Not enabled with Ball Overlaps option"]);
             } else {
                 let player_names = [];
-                initial_balls_list.forEach(player => { player_names.push(player.name); });
+                initial_balls_list.forEach(player => {
+                    if (player.balls.length > 0) player_names.push(player.name);
+                });
                 this._PopulateSelect(this.sel_winning_player, ["Nobody", ...player_names]);
             }
 
@@ -352,6 +355,7 @@ class View {
     }
 
     UpdateGameState({game_state}) {
+        this.players_still_in = [];
         for (let i = 0; i < game_state.length; i++) {
             const balls_left_counter = document.getElementById(`p${i + 1}_balls_left`);
             if (balls_left_counter === null) continue;
@@ -361,6 +365,7 @@ class View {
             else
                 balls_left_counter.innerText = "?";
             
+            if (game_state[i].balls_left !== 0) this.players_still_in.push(game_state[i].name);
             this._CheckElement(balls_left_counter, game_state[i].balls_left === 0);
         }
     }
@@ -394,6 +399,11 @@ class View {
 
     _RequestStartOrEndGame() {
         if (this.game_in_progress) {
+            if (this.players_still_in.length === 1) {
+                let i = 0;
+                while (this.players_still_in[0] !== this.sel_winning_player.childNodes[i].innerText) i++;
+                this.sel_winning_player.selectedIndex = i;
+            }
             this.mod_winner.style.display = "block";
         } else {
             this.mod_new_game.style.display = "block";
