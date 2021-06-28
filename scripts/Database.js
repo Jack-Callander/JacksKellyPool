@@ -5,13 +5,14 @@ class Database {
         this._game_keys = [];
         this._valid_key_chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-        window.addEventListener("beforeunload", () => this._deconstructor);
+        window.addEventListener("beforeunload", () => { this._deconstructor(); });
 
         this._fb = firebase.database();
     }
 
     NewGame(info) {
         const game_code = this._GenerateCode(4);
+        this._game_keys.push(game_code);
 
         let player_codes = [];
         info.initial_balls_list.forEach(player => {
@@ -25,7 +26,7 @@ class Database {
 
     EndGame() {
         this._game_keys.forEach(key => {
-            // Remove all the keys from the database
+            this._fb.ref(`games/${key}`).remove();
         });
     }
 

@@ -27,6 +27,7 @@ class Controller {
 
         // Model -> Database
         this._model.gameStartedEvent.addListener(e => { this._database.NewGame(e); });
+        this._model.gameEndedEvent.addListener(e => { this._database.EndGame(); });
 
 
 
