@@ -12,6 +12,8 @@ class Database {
 
     NewGame(info) {
         const game_code = this._GenerateCode(4);
+
+        let player_codes = [];
         info.initial_balls_list.forEach(player => {
             const player_code = this._GenerateCode(3);
             this._fb.ref(`games/${game_code}/${player_code}`).set({

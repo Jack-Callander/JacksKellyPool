@@ -8,6 +8,7 @@ class Controller {
         this._view = new View();
         this._database = new Database();
 
+        // View -> Model
         this._view.startGameEvent.addListener(e => { this._model.StartGame(e); });
         this._view.endGameEvent.addListener(e => { this._model.EndGame(e); });
         this._view.pocketBallEvent.addListener(e => { this._model.PocketBall(e); });
@@ -15,6 +16,7 @@ class Controller {
         this._view.requestPlayerStats.addListener(e => { this._model.GetPlayerStats(e); });
         this._view.requestDeleteStats.addListener(e => { this._model.DeletePlayerStats(e); });
 
+        // Model -> View
         this._model.gameStartedEvent.addListener(e => { this._view.ToggleNewGame(e); });
         this._model.gameEndedEvent.addListener(e => { this._view.ToggleNewGame(e); });
         this._model.pocketedBallEvent.addListener(e => { this._view.UpdateGameState(e); });
@@ -22,6 +24,10 @@ class Controller {
         this._model.invalidBallCountEvent.addListener(e => { this._view.ShowError(e); });
         this._model.responsePlayerStats.addListener(e => { this._view.ShowStats(e); });
         this._model.responseDeleteStats.addListener(e => { this._view.RefreshStatsTable(e); });
+
+        // Model -> Database
+        this._model.gameStartedEvent.addListener(e => { this._database.NewGame(e); });
+
 
 
         // Debug messages
