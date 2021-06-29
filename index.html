@@ -167,7 +167,7 @@
                     make it more difficult for them. The player who was eliminated first goes up a ball in the ball menu to make
                     it easier for them. <br /> <br />
 
-                    <h2>Subtleties</h2> <br />
+                    <h2>Subtleties and Features</h2> <br />
                     <b>Divulged Balls</b> - A ball that every player is aware of. If a player is good enough to win with only 1
                     Ball, they may be demoted to 2 Balls that are no longer secret to the other players.
                     <br /><br />
@@ -182,20 +182,27 @@
                     <br /><br />
                     <b>SHOW Buttons</b> - The <b>SHOW</b> buttons on the <b>Game</b> page keep a count of how many times they are
                     pressed. This allows players to ensure no one has checked their balls.
-                    <br /> <br />
+                    <br /><br />
                     <b>Player Stats</b> - At the end of each game a winning player may be requested. This updates the win rate
                     stored under that player's name. A player's win statistics can be viewed on the <b>Game</b> page by clicking
                     their name either when a game is not in play or during a game. The specific stats that are kept track of are a
                     player's wins and losses when they played against a certain number of opponents and were assigned a certain
                     number of balls. Only the most recent 20 games in each situation are stored, that way a player can always
                     improve their win rate to 100% even after losing many games.
-                    <br /> <br />
+                    <br /><br />
+                    <b>Joining Games</b> - Players can join games on their own device which stays in sync with the Hosts'. To do
+                    this select <b>Join Game</b> on the main menu and enter the 6-character <b>Game Code</b> found on the
+                    <b>Game</b> page of the Host device. You can find your <b>Player Code</b> on your assigned balls page (by
+                    pressing the <b>SHOW</b> button beside your name). The <b>SHOW Count</b> will stay in sync across devices so
+                    don't worry about someone checking your assigned balls from another device. Also, only the host can modify the
+                    rack.
+                    <br /><br />
 
                     <h2>Credit</h2>
                     Made by Jack Callander. <br /> <br />
                     Cheers Travis, Thomas, Edward, Brendan, Richard, Ethan, Lyam, Bella, James, Carlos, Jackson, Aisha and Massi
                     for inspiration and playtesting! <br /> <br />
-                    Version 2 created on the 3rd of May 2021. Last Updated 16th of June 2021. Currently Version 2.2
+                    Version 2 created on the 3rd of May 2021. Last Updated 29th of June 2021. Currently Version 2.3
                 </div>
 
                 <!-- CHANGE LOG : Contains info about historical versions -->
@@ -330,7 +337,17 @@
                     Player stats are now a thing. These are saved by name and are specific to the device they were created on as this
                     is a static web app. Press on a players name in the <b>Game</b> tab to see their statistics. Also submit a winner
                     at the end of each round for the stats to update.
-                    
+                    </p><br />
+                    <b>Version 2.3</b> <br />
+                    <p>
+                    This app is now connected to a Firebase realtime database! There is still no server backend, but the realtime
+                    database allows information to be stored centrally where any device can access it. This allowed the following
+                    new feature to be implemented:
+                    <br />
+                        Added a main menu with the ability to host a game (the current app) or join from another device. This
+                        aims to solve an ease of use problem reddit user u/Gaimcap was having. Players can now use their own
+                        device to check their assigned balls and the current state of the rack using a <b>Game Code</b> and a
+                        <b>Player Code</b>.
                     </p>
                 </div>
             </div>
