@@ -43,7 +43,7 @@ tbx_player_code.addEventListener("focus", selectOnFocus);
 
 // IMPLEMENTATION
 const connect = (game_code, player_code) => {
-    const player_info = firebase.database().ref(`games/${game_code}/${player_code}`).get().then((snapshot) => {
+    firebase.database().ref(`games/${game_code}/${player_code}`).get().then((snapshot) => {
         if (snapshot.exists()) {
             const data = snapshot.val();
 
@@ -58,6 +58,18 @@ const connect = (game_code, player_code) => {
             }
 
             lbl_game_code.innerText = `Joined Game ${game_code}`;
+
+            firebase.database().ref(`games/${game_code}/${player_code}`).on("value", (snapshot2) => {
+                const data2 = snapshot2.val();
+                btn_show.innerText = `SHOW ${data2.show_count}`;
+            });
+            btn_show.addEventListener("click", () => {
+                const new_count = parseInt(btn_show.innerText.split(" ")[1]) + 1;
+                btn_show.innerText = `SHOW ${new_count}`;
+                firebase.database().ref(`games/${game_code}/${player_code}`).update({
+                    show_count: new_count,
+                });
+            });
 
             tbx_game_code.style.display = "none";
             tbx_player_code.style.display = "none";
