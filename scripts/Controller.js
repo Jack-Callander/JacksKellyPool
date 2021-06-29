@@ -32,6 +32,12 @@ class Controller {
         // Database -> View
         this._database.generatedCodesEvent.addListener(e => { this._view.ShowCodes(e); });
         this._database.removedCodesEvent.addListener(e => { this._view.HideCodes(e); });
+        this._database.updateShowCountEvent.addListener(e => { this._view.UpdateShowCount(e); });
+
+        // View -> Database
+        this._view.pocketBallEvent.addListener(e => { this._database.PocketBall(e); });
+        this._view.undoPocketBallEvent.addListener(e => { this._database.UndoPocketBall(e); });
+        this._view.updateShowCountEvent.addListener(e => { this._database.UpdateShowCount(e); });
 
 
 

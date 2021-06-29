@@ -82,6 +82,7 @@ class View {
         this.undoPocketBallEvent = new Event();
         this.requestPlayerStats = new Event();
         this.requestDeleteStats = new Event();
+        this.updateShowCountEvent = new Event();
 
         this._RenderOptions();
         this._AssignEvents();
@@ -280,13 +281,18 @@ class View {
                 } else {
                     // Create a show button
                     const show_button = document.createElement("div");
+                    show_button.setAttribute("player", initial_balls_list[i].name);
                     show_button.setAttribute("class", "btn centered");
                     show_button.setAttribute("show_type", "");
                     this._CheckElement(show_button, true);
                     show_button.innerText = "SHOW 0";
                     show_button.addEventListener("click", (e) => {
-                        const current_count = parseInt(e.target.innerText.split(" ")[1]);
-                        e.target.innerText = `SHOW ${current_count + 1}`;
+                        const new_count = parseInt(e.target.innerText.split(" ")[1]) + 1;
+                        e.target.innerText = `SHOW ${new_count}`;
+                        this.updateShowCountEvent.trigger({
+                            player_code: this.player_codes[i],
+                            show_count: new_count,
+                        });
                         
                         for (let j = 0; j < this.balls.length; j++) {
                             if (initial_balls_list[i].balls.indexOf(j + 1) !== -1) {
@@ -301,12 +307,19 @@ class View {
 
                         this.mod_balls.style.display = "block";
                     });
+
                     row_element.appendChild(show_button);
                 }
 
                 this.con_players_game.appendChild(row_element);
             }
         }
+    }
+
+    UpdateShowCount({player_name, show_count}) {
+        const show_button = document.querySelector(`.btn[player="${player_name}"]`);
+        if (show_button !== undefined)
+            show_button.innerText = `SHOW ${show_count}`;
     }
 
     RefreshStatsTable(is_game_in_progress) {
