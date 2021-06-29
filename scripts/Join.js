@@ -71,6 +71,19 @@ const connect = (game_code, player_code) => {
                 });
             });
 
+            firebase.database().ref(`games/${game_code}/game_info/rack`).on("value", (snapshot3) => {
+                const data3 = snapshot3.val();
+                for (let i = 0; i < 15; i++) {
+                    if (data3 === null || !data3.includes(i+1)) {
+                        document.getElementById(`${i+1}ball`).setAttribute("checked", "");
+                        document.getElementById(`ball${i+1}`).setAttribute("checked", "");
+                    } else {
+                        document.getElementById(`${i+1}ball`).removeAttribute("checked");
+                        document.getElementById(`ball${i+1}`).removeAttribute("checked");
+                    }
+                }
+            })
+
             tbx_game_code.style.display = "none";
             tbx_player_code.style.display = "none";
             btn_join.style.display = "none";
