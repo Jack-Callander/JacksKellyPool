@@ -23,7 +23,18 @@
         <link rel="shortcut icon" type="image/png" href="./images/4ball.png" />
     </head>
     <body>
-        <!-- LOADING SCREEN HERE -->
+        <!-- LOADING SCREEN AND MENU HERE -->
+
+        <div id="modal_menu" class="modal" loading_type style="display: block;">
+            <div class="container centered modal_content">
+                <div class="title_con centered" style="margin-bottom: 10rem;">
+                    <div class="title_el">Jack's</div>
+                    <h1 class="title_el">KELLY POOL</h1>
+                </div>
+                <div id="btn_host_game" class="btn centered fill" outer_type checked>Host Game</div>
+                <div id="btn_join_game" class="btn centered fill" outer_type checked>Join Game</div>
+            </div>
+        </div>
 
         <div id="modal_loading" class="modal" loading_type style="display: block;">
             <div class="container centered modal_content">
@@ -35,7 +46,7 @@
             </div>
         </div>
 
-        <!-- APP STARTS HERE -->
+        <!-- HOST APP STARTS HERE -->
         <div class="page centered">
 
             <!-- TITLE : Jack's Kelly Pool -->
@@ -87,6 +98,7 @@
             <!-- GAME PANEL : Holds player table and rack tracker -->
 
             <div id="game" class="panel centered fill">
+                <div id="game_code" class="code"></div>
                 <div id="game_con" class="container border fill"></div>
 
                 <div id="game_tracker_con" class="container centered border fill" hidden>
@@ -339,6 +351,7 @@
 
         <div id="modal_balls" class="modal">
             <div class="container centered border modal_content">
+                <div id="player_code" class="code">No player code available (offline).</div>
                 <div id="show_balls_con">
                     <figure id="ball1" class="ballfig"><img src="./images/1ball.png" id="1ball" class="ballimg ballimg1" /><figcaption>1 Ball | Yellow | Solid</figcaption></figure>
                     <figure id="ball2" class="ballfig"><img src="./images/2ball.png" id="2ball" class="ballimg ballimg2" /><figcaption>2 Ball | Blue | Solid</figcaption></figure>

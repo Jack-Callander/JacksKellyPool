@@ -1,6 +1,7 @@
 :root {
     --col_back: #222;
     --col_accent: #333;
+    --col_text_dull: #555;
     --col_text: #eee;
     --col_highlight: #d44;
     --val_fade: 0.3;

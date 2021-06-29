@@ -180,3 +180,8 @@ tr {
     text-align: center;
     height: 5rem;
 }
+
+.code {
+    color: var(--col_text_dull);
+    padding-bottom: 1rem;
+}

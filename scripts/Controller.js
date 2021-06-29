@@ -29,6 +29,10 @@ class Controller {
         this._model.gameStartedEvent.addListener(e => { this._database.NewGame(e); });
         this._model.gameEndedEvent.addListener(e => { this._database.EndGame(); });
 
+        // Database -> View
+        this._database.generatedCodesEvent.addListener(e => { this._view.ShowCodes(e); });
+        this._database.removedCodesEvent.addListener(e => { this._view.HideCodes(e); });
+
 
 
         // Debug messages

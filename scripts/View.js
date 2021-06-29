@@ -6,6 +6,9 @@ class View {
         this.page_game = document.getElementById("game");
         this.page_help = document.getElementById("help");
 
+        this.btn_host_game = document.getElementById("btn_host_game");
+        this.btn_join_game = document.getElementById("btn_join_game");
+
         this.btn_options = document.getElementById("btn_options");
         this.btn_game = document.getElementById("btn_game");
         this.btn_help = document.getElementById("btn_help");
@@ -30,6 +33,7 @@ class View {
         this.con_players_game = document.getElementById("game_con");
         this.con_rack_tracker = document.getElementById("game_tracker_con");
 
+        this.mod_menu = document.getElementById("modal_menu");
         this.mod_new_game = document.getElementById("modal_newGame");
         this.mod_balls = document.getElementById("modal_balls");
         this.mod_error = document.getElementById("modal_error");
@@ -51,6 +55,10 @@ class View {
 
         this.err_message = document.getElementById("error_text");
         this.btn_close_error = document.getElementById("btn_closeError");
+
+        this.lbl_game_code = document.getElementById("game_code");
+        this.lbl_player_code = document.getElementById("player_code");
+        this.player_codes = [];
 
         this.balls = [];
         this.rack = [];
@@ -112,6 +120,9 @@ class View {
     }
 
     _AssignEvents() {
+        this.btn_host_game.addEventListener("click", () => { this.mod_menu.style.display = "none"; });
+        this.btn_join_game.addEventListener("click", () => { window.location.replace("/join"); });
+
         this.btn_options.addEventListener("click", () => { this._ChangeTabs("options"); });
         this.btn_game.addEventListener("click", () => { this._ChangeTabs("game"); });
         this.btn_help.addEventListener("click", () => { this._ChangeTabs("help"); });
@@ -285,6 +296,9 @@ class View {
                                 this.balls[j].removeAttribute("vis");
                             }
                         }
+
+                        this.lbl_player_code.innerText = `${initial_balls_list[i].name}'s Player Code: ${this.player_codes[i]}`;
+
                         this.mod_balls.style.display = "block";
                     });
                     row_element.appendChild(show_button);
@@ -394,6 +408,29 @@ class View {
         this.mod_stats.style.display = "block";
     }
 
+    ShowCodes({game_code, player_codes}) {
+        
+        this._CheckElement(this.lbl_game_code, window.navigator.onLine);
+        this._CheckElement(this.lbl_player_code, window.navigator.onLine);
+        if (window.navigator.onLine) {
+            this.lbl_game_code.innerText = `Game Code: ${game_code}`;
+            this.player_codes = [];
+            player_codes.forEach(code => {
+                this.player_codes.push(code);
+            });
+        } else {
+            this.lbl_game_code.innerText = "No game code available (offline).";
+            this.lbl_player_code.innerText = "No player code available (offline).";
+        }
+
+        this.lbl_game_code.style.display = "block";
+    }
+
+    HideCodes() {
+        this.lbl_game_code.style.display = "none";
+        this.player_codes = [];
+    }
+
     ShowError(e) {
         this.err_message.innerText = e.message;
         this.mod_error.style.display = "block";
@@ -417,6 +454,7 @@ class View {
         if (this.sel_winning_player.selectedIndex !== 0)
             winner = this.sel_winning_player.options[this.sel_winning_player.selectedIndex].innerText;
 
+        this.player_codes = [];
         this.endGameEvent.trigger({winning_players_name: winner});
     }
 

@@ -87,6 +87,17 @@ figure[checked] {
     text-align: center;
 }
 
+.text[code_type] {
+    width: 14rem;
+    text-align: center;
+    text-transform: uppercase;
+    margin: 1rem;
+}
+
+.code[checked] {
+    color: var(--col_text);
+}
+
 [hidden] {
     display: none;
 }
