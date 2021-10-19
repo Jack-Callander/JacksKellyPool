@@ -20,39 +20,8 @@ class Database {
     NewGame(info) {
         const game_code = this._GenerateCode(6);
         this._game_keys.push(game_code);
-
-        let player_codes = [];
-        info.initial_balls_list.forEach(player => {
-            const player_code = this._GenerateCodeUnique(3, player_codes);
-            player_codes.push(player_code);
-
-            this._fb.ref(`games/${game_code}/${player_code}`).set({
-                name: player.name,
-                balls: player.balls,
-                show_count: 0,
-            });
-        });
-
-        this._rack = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
-        this._fb.ref(`games/${game_code}/game_info`).set({
-            rack: this._rack,
-        });
-
-        this._current_game_key = game_code;
-        this.generatedCodesEvent.trigger({
-            game_code: game_code,
-            player_codes: player_codes,
-        });
-
-        for (let i = 0; i < info.initial_balls_list.length; i++) {
-            this._fb.ref(`games/${game_code}/${player_codes[i]}`).on("value", (snapshot) => {
-                const data = snapshot.val();
-                this.updateShowCountEvent.trigger({
-                    player_name: info.initial_balls_list[i].name,
-                    show_count: data.show_count,
-                });
-            });
-        }
+        
+        this._SendGameToDatabase(info, `games/${game_code}/`);
     }
 
     EndGame() {
@@ -87,6 +56,46 @@ class Database {
             show_count: show_count,
         });
     }
+    
+    async _SendGameToDatabase(info, prefix) {
+        let player_codes = [];
+        info.initial_balls_list.forEach(player => {
+            const player_code = this._GenerateCodeUnique(3, player_codes);
+            player_codes.push(player_code);
+
+            this._fb.ref(`${prefix}${player_code}`).set({
+                name: player.name,
+                balls: player.balls,
+                show_count: 0,
+            });
+        });
+
+        const location = await this._GetLocation();
+        const date = new Date();
+        this._rack = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+        this._fb.ref(`${prefix}game_info`).set({
+            country: location[0],
+            region: location[1],
+            time: date.getTime(),
+            rack: this._rack,
+        });
+
+        this._current_game_key = game_code;
+        this.generatedCodesEvent.trigger({
+            game_code: game_code,
+            player_codes: player_codes,
+        });
+
+        for (let i = 0; i < info.initial_balls_list.length; i++) {
+            this._fb.ref(`${prefix}${player_codes[i]}`).on("value", (snapshot) => {
+                const data = snapshot.val();
+                this.updateShowCountEvent.trigger({
+                    player_name: info.initial_balls_list[i].name,
+                    show_count: data.show_count,
+                });
+            });
+        }
+    }
 
     _GenerateCode(length) {
         let code = "";
@@ -101,6 +110,15 @@ class Database {
         let code = this._GenerateCode(length);
         while (dup_list.includes(code)) code = this._GenerateCode(length);
         return code;
+    }
+    
+    async _GetLocation() {
+        const location = await fetch("http://ip-api.com/json/?fields=16393")
+            .then(res => res.json()).then(data => {
+                return [data.country, data.regionName];
+        });
+        
+        return location;
     }
 
     _deconstructor() {
