@@ -32,10 +32,12 @@ class Database {
                 show_count: 0,
             });
         });
-
+        
         this._rack = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+        const date = new Date();
         this._fb.ref(`games/${game_code}/game_info`).set({
             rack: this._rack,
+            time: date.getTime(),
         });
 
         this._current_game_key = game_code;
