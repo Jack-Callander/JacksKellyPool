@@ -185,3 +185,8 @@ tr {
     color: var(--col_text_dull);
     padding-bottom: 1rem;
 }
+
+.bmc-btn-container {
+    margin: 4rem;
+    transform: scale(1.8, 1.8);
+}

@@ -25,6 +25,15 @@ body {
     color: var(--col_text);
     font-family: century-gothic, sans-serif;
     font-size: xx-large;
+    max-width: 1000px;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    margin: auto;
+    cursor: default;
+}
+
+body::-webkit-scrollbar {
+    display: none;
 }
 
 .page {

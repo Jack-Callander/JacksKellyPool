@@ -9,3 +9,11 @@
     border-radius: 2.5rem;
     width: 18rem;
 }
+
+.btn {
+    cursor: pointer;
+}
+
+.img_ball {
+    cursor: pointer;
+}
