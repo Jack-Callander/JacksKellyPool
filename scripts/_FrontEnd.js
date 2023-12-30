@@ -4,9 +4,9 @@ window.addEventListener("load", () => {
 });
 
 // Prevent accidental refresh
-window.addEventListener("beforeunload", () => {
-    return "Are you sure you want to leave/reload?";
-});
+window.onbeforeunload = function() {
+	return "Your game will be lost if you leave the page! Are you sure?";
+};
 
 // Close modals that can be closed
 window.onclick = function(e) {
