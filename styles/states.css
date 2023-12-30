@@ -35,6 +35,10 @@
     color: var(--col_accent);
 }
 
+.bigbtn[outer_type] {
+	margin: 2rem 0 2rem 0;
+}
+
 .btn[show_type] {
     height: 0.5rem;
     width: 10rem;

@@ -25,7 +25,7 @@ body {
     color: var(--col_text);
     font-family: century-gothic, sans-serif;
     font-size: xx-large;
-    max-width: 1000px;
+    max-width: 64rem;
     -ms-overflow-style: none;
     scrollbar-width: none;
     margin: auto;
