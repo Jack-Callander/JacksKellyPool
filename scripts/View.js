@@ -463,6 +463,9 @@ class View {
     }
 
     _EndGame() {
+		// Allow refreshing again
+		window.onbeforeunload = null;
+		
         let winner = null;
         if (this.sel_winning_player.selectedIndex !== 0)
             winner = this.sel_winning_player.options[this.sel_winning_player.selectedIndex].innerText;
@@ -472,6 +475,11 @@ class View {
     }
 
     _TriggerNewGame() {
+		// Prevent accidental refresh from now on
+		window.onbeforeunload = function() {
+			return "Your game will be lost if you leave the page! Are you sure?";
+		};
+		
         let player_names = [];
         let ball_counts = [];
         let divulged_list = [];

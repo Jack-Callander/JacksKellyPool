@@ -3,11 +3,6 @@ window.addEventListener("load", () => {
     document.getElementById("modal_loading").style.display = "none";
 });
 
-// Prevent accidental refresh
-window.onbeforeunload = function() {
-	return "Your game will be lost if you leave the page! Are you sure?";
-};
-
 // Close modals that can be closed
 window.onclick = function(e) {
     let m = document.getElementById("modal_newGame");
