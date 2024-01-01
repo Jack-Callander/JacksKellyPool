@@ -12,7 +12,7 @@ class Model {
         this._full_rack = [];
         let i = 0;
         while (i < this._balls_max) this._full_rack.push(++i);
-        this._current_rack = [...this._full_rack];
+        this._current_rack = this._GetRack({});
 
         this.gameStartedEvent = new Event();
         this.gameEndedEvent = new Event();
@@ -24,11 +24,12 @@ class Model {
         this.responseDeleteStats = new Event();
     }
 
-    StartGame({player_names, ball_counts, divulged_list, do_allow_ball_overlaps}) {
+    StartGame({player_names, ball_counts, divulged_list, do_allow_ball_overlaps, locked_balls}) {
         // Check for problems
         if (this._is_game_in_progress) return;
         if (!this._HasValidPlayerNames({player_names})) return;
-        if (!this._HasValidBallCounts({ball_counts, do_allow_ball_overlaps})) return;
+        locked_balls = this._RestrictLockedBalls({locked_balls});
+        if (!this._HasValidBallCounts({ball_counts, do_allow_ball_overlaps, locked_balls})) return;
 
         // Create Players
         let i = 0;
@@ -41,11 +42,12 @@ class Model {
         });
 
         // Assign Random Balls
-        const initial_balls_list = this._AssignBalls(do_allow_ball_overlaps);
+        const initial_balls_list = this._AssignBalls({do_allow_ball_overlaps, locked_balls});
         
         this._is_game_in_progress = true;
+        this._current_rack = this._GetRack({locked_balls});
         this._is_allow_ball_overlaps_enabled = do_allow_ball_overlaps;
-        this.gameStartedEvent.trigger({initial_balls_list: initial_balls_list, is_game_in_progress: this._is_game_in_progress});
+        this.gameStartedEvent.trigger({initial_balls_list: initial_balls_list, is_game_in_progress: this._is_game_in_progress, locked_balls: locked_balls});
     }
 
     EndGame({winning_players_name}) {
@@ -61,7 +63,7 @@ class Model {
         }
 
         this._players = [];
-        this._current_rack = [...this._full_rack];
+        this._current_rack = this._GetRack({});
         this._is_game_in_progress = false;
         this.gameEndedEvent.trigger({winning_players_name: winning_players_name, is_game_in_progress: this._is_game_in_progress});
     }
@@ -99,14 +101,14 @@ class Model {
         this.responseDeleteStats.trigger(this._is_game_in_progress);
     }
 
-    _AssignBalls(do_allow_ball_overlaps) {
-        let rack = [...this._full_rack]
+    _AssignBalls({do_allow_ball_overlaps, locked_balls}) {
+        let rack = this._GetRack({locked_balls});
         this._players.forEach(player => {
             for (let i = 0; i < player.ball_count; i++) {
                 const random_index = Math.floor(Math.random() * rack.length);
                 player.AddBall(rack.splice(random_index, 1)[0]);
             }
-            if (do_allow_ball_overlaps) rack = [...this._full_rack];
+            if (do_allow_ball_overlaps) rack = this._GetRack({locked_balls});
         });
 
         let new_balls_list = [];
@@ -118,6 +120,17 @@ class Model {
         });
         this.assignedNewBallsEvent.trigger({new_balls_list});
         return new_balls_list;
+    }
+
+    _GetRack({locked_balls}) {
+        let rack = [...this._full_rack];
+        if (locked_balls == undefined || locked_balls.length == 0) return rack;
+
+        // Removed locked balls
+        locked_balls.forEach(ball => {
+            if (rack.includes(ball)) rack.splice(rack.indexOf(ball), 1);
+        });
+        return rack;
     }
 
     _UpdateGameState() {
@@ -166,15 +179,38 @@ class Model {
         return valid;
     }
 
-    _HasValidBallCounts({ball_counts, do_allow_ball_overlaps}) {
+    _RestrictLockedBalls({locked_balls}) {
+        const full_rack = [...this._full_rack];
+        let corrected_locked_balls = [];
+
+        locked_balls.forEach(ball => {
+            if (full_rack.includes(ball)) corrected_locked_balls.push(ball);
+        })
+
+        return corrected_locked_balls;
+    }
+
+    _HasValidBallCounts({ball_counts, do_allow_ball_overlaps, locked_balls}) {
         let valid = true;
-        const balls_max = this._balls_max;
+        const balls_max = this._balls_max - locked_balls.length;
+
+        if (balls_max === 0) {
+            this.invalidBallCountEvent.trigger({message: `Can't start a game with no balls!`});
+            return false;
+        }
+
+        let total = 0;
         let balls_acc = 0;
         ball_counts.forEach(count => {
+            total += count;
             balls_acc += count;
             if (balls_acc > balls_max) valid = false;
             if (do_allow_ball_overlaps) balls_acc = 0;
         });
+        if (total === 0) {
+            this.invalidBallCountEvent.trigger({message: `There are no players in this game!`});
+            return false;
+        }
         if (!valid) this.invalidBallCountEvent.trigger({message: `There aren't enough balls to go around!`});
         return valid;
     }
