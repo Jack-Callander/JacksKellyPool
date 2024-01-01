@@ -28,6 +28,7 @@ class View {
         this.opt_show_remaining_current = true;
         this.opt_allow_overlaps = document.getElementById("cb_allowBallOverlaps");
         this.opt_allow_overlaps_current = false;
+        this.opt_locked_balls = document.getElementById("locked_balls");
 
         this.con_players_options = document.getElementById("player_options_con");
         this.con_players_game = document.getElementById("game_con");
@@ -118,6 +119,11 @@ class View {
         if (options_allow_overlaps !== null) {
             this._CheckElement(this.opt_allow_overlaps, options_allow_overlaps === "true");
         }
+
+        const options_locked_balls = localStorage.getItem("options_locked_balls");
+        if (options_locked_balls !== null) {
+            this.opt_locked_balls.value = options_locked_balls;
+        }
     }
 
     _AssignEvents() {
@@ -129,10 +135,11 @@ class View {
         this.btn_help.addEventListener("click", () => { this._ChangeTabs("help"); });
 
         this.opt_player_count.addEventListener("change", () => { this._RenderPlayerOptionsTable(); this._SaveOptions(); });
-        this.opt_ball_count.addEventListener("change", () => { this._SaveOptions(); })
+        this.opt_ball_count.addEventListener("change", () => { this._SaveOptions(); });
         this.opt_show_remaining.addEventListener("click", () => { this._CheckElement(this.opt_show_remaining, null); this._SaveOptions(); });
         this.opt_allow_overlaps.addEventListener("click", () => { this._CheckElement(this.opt_allow_overlaps, null); this._SaveOptions(); });
-        
+        this.opt_locked_balls.addEventListener("change", () => { this._SaveOptions(); });
+
         this.btn_sort.addEventListener("click", () => { this._SortPlayerOptionsTable(); });
         this.btn_new_game.addEventListener("click", () => { this._RequestStartOrEndGame(); });
         this.btn_new_game_options.addEventListener("click", () => { this._RequestStartOrEndGame(); });
@@ -318,7 +325,7 @@ class View {
 
     UpdateShowCount({player_name, show_count}) {
         const show_button = document.querySelector(`.btn[player="${player_name}"]`);
-        if (show_button !== undefined)
+        if (show_button != null)
             show_button.innerText = `SHOW ${show_count}`;
     }
 
@@ -350,7 +357,7 @@ class View {
         }
     }
 
-    ToggleNewGame({is_game_in_progress, initial_balls_list}) {
+    ToggleNewGame({is_game_in_progress, initial_balls_list, locked_balls}) {
         this.game_in_progress = is_game_in_progress;
         this._RenderGameTable({is_game_in_progress: is_game_in_progress, initial_balls_list: initial_balls_list});
 
@@ -370,6 +377,16 @@ class View {
                 this._PopulateSelect(this.sel_winning_player, ["Nobody", ...player_names]);
             }
 
+            // Lock out balls
+            this.rack.forEach(ball => { 
+                if (locked_balls.includes(parseInt(ball.getAttribute("value"))))
+                    this._CheckElement(ball, true, "locked");
+            });
+            this.balls.forEach(ball => { 
+                if (locked_balls.includes(parseInt(ball.getAttribute("value"))))
+                    this._CheckElement(ball, true, "locked"); 
+            });
+
             this.con_rack_tracker.removeAttribute("hidden");
         } else {
             this.btn_new_game.removeAttribute("highlighted");
@@ -380,6 +397,8 @@ class View {
             this.con_rack_tracker.setAttribute("hidden", "");
             this.rack.forEach(ball => { this._CheckElement(ball, false); });
             this.balls.forEach(ball => { this._CheckElement(ball, false); });
+            this.rack.forEach(ball => { this._CheckElement(ball, false, "locked"); });
+            this.balls.forEach(ball => { this._CheckElement(ball, false, "locked"); });
         }
     }
 
@@ -490,6 +509,8 @@ class View {
             divulged_list.push(this._HasDivulgedBalls(player.ball_index));
         });
 
+        const locked_balls = this._GetLockedBalls();
+
         const do_allow_ball_overlaps = this._IsChecked(this.opt_allow_overlaps);
         this.opt_allow_overlaps_current = do_allow_ball_overlaps;
         this.opt_show_remaining_current = this._IsChecked(this.opt_show_remaining);
@@ -499,6 +520,7 @@ class View {
             ball_counts: ball_counts,
             divulged_list: divulged_list,
             do_allow_ball_overlaps: do_allow_ball_overlaps,
+            locked_balls: locked_balls,
         }); 
     }
 
@@ -511,6 +533,19 @@ class View {
             });
         });
         return players_options;
+    }
+
+    _GetLockedBalls() {
+        let locked_balls = [];
+        const locked_balls_string = this.opt_locked_balls.value;
+        // Split the locked balls string by any character that isn't a digit
+        const numbers = locked_balls_string.split(/\D/);
+        numbers.forEach(number => {
+            const ball = parseInt(number);
+            locked_balls.push(ball);
+        });
+
+        return locked_balls;
     }
 
     _SetOptionsTable(player_options) {
@@ -552,6 +587,7 @@ class View {
         localStorage.setItem("options_ball_index", this.opt_ball_count.selectedIndex);
         localStorage.setItem("options_show_remaining", this._IsChecked(this.opt_show_remaining));
         localStorage.setItem("options_allow_overlaps", this._IsChecked(this.opt_allow_overlaps));
+        localStorage.setItem("options_locked_balls", this.opt_locked_balls.value);
     }
 
     _ChangeTabs(tab) {
@@ -604,14 +640,14 @@ class View {
         });
     }
 
-    _CheckElement(el, val) {
-        if (val === null) this._CheckElement(el, !this._IsChecked(el)); // Toggle
-        else if (val)     el.setAttribute("checked", "");               // Set checked
-        else              el.removeAttribute("checked");                // Set unchecked
+    _CheckElement(el, val, name="checked") {
+        if (val === null) this._CheckElement(el, !this._IsChecked(el, name), name); // Toggle
+        else if (val)     el.setAttribute(name, "");               // Set checked
+        else              el.removeAttribute(name);                // Set unchecked
     }
 
-    _IsChecked(el) {
-        return el.hasAttribute("checked");
+    _IsChecked(el, name="checked") {
+        return el.hasAttribute(name);
     }
 }
 

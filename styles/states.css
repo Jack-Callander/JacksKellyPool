@@ -74,6 +74,10 @@
     opacity: var(--val_fade);
 }
 
+.img_ball[locked] {
+    visibility: hidden;
+}
+
 figure[vis] {
     display: flex;
 }

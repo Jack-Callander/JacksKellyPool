@@ -86,6 +86,10 @@
                         <div class="option_title">Allow Ball Overlaps?</div>
                         <div class="option_data"><div class="cb" id="cb_allowBallOverlaps"></div></div>
                     </div>
+                    <div class="option_elem">
+                        <div class="option_title">Locked Balls</div>
+                        <input id="locked_balls" class="text" placeholder="1, 2, 3">
+                    </div>
                 </div>
                 <div id="btn_sort" class="btn bigbtn centered fill" outer_type checked>Sort Player Table</div>
                 <div id="player_options_con" class="container border fill" >
@@ -179,6 +183,10 @@
                     <b>Allow Ball Overlaps?</b> - This can create some interesting gameplay and allow for multiple winners. If
                     this option is checked, it is possible for one player to share a ball with another without knowing.
                     <br /><br />
+                    <b>Locked Balls</b> - In the unfortunate case of missing balls or even having two of the same ball, this
+                    option will prevent the specified balls from being assigned to players; locking them out of the game. This
+                    can also be used to fine-tune which balls are part of the game.
+                    <br /><br />
                     <b>Naming Players</b> - Players can be given names other than <b>Player 1</b>, <b>Player 2</b>... Simply type
                     in their name over the existing one in the <b>Options</b> page.
                     <br /><br />
@@ -204,7 +212,7 @@
                     Made by Jack Callander. <br /> <br />
                     Cheers Travis, Thomas, Edward, Brendan, Richard, Ethan, Lyam, Bella, James, Carlos, Jackson, Aisha and Massi
                     for inspiration and playtesting! <br /> <br />
-                    Version 2 created on the 3rd of May 2021. Last Updated 31st of December 2023. Currently Version 2.5
+                    Version 2 created on the 3rd of May 2021. Last Updated 1st of January 2024. Currently Version 2.6
                 </div>
                 
                 <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="jackc" data-color="#dd4444" data-emoji="🍺"  data-font="Cookie" data-text="Buy me a drink" data-outline-color="#ffffff" data-font-color="#ffffff" data-coffee-color="#FFDD00" ></script>
@@ -359,6 +367,11 @@
 					<b>Version 2.5</b> <br />
                     <p>
                     Improved the scaling for thin devices and changed to a Beer button :D
+                    </p>
+                    <b>Version 2.6</b> <br />
+                    <p>
+                    Added a <b>Locked Balls</b> option. Players can choose to exclude balls from the game incase they are missing
+                    a ball or have double ups.
                     </p>
                 </div>
             </div>

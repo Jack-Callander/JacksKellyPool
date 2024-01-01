@@ -34,6 +34,13 @@ class Database {
         });
         
         this._rack = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+        if (info.locked_balls != undefined) {
+            info.locked_balls.forEach(ball => {
+                if (this._rack.includes(ball))
+                    this._rack.splice(this._rack.indexOf(ball), 1);
+            });
+        }
+
         const date = new Date();
         this._fb.ref(`games/${game_code}/game_info`).set({
             rack: this._rack,
@@ -49,6 +56,7 @@ class Database {
         for (let i = 0; i < info.initial_balls_list.length; i++) {
             this._fb.ref(`games/${game_code}/${player_codes[i]}`).on("value", (snapshot) => {
                 const data = snapshot.val();
+                if (data === null) return;
                 this.updateShowCountEvent.trigger({
                     player_name: info.initial_balls_list[i].name,
                     show_count: data.show_count,
