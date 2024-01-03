@@ -1,4 +1,5 @@
 import Event from "./Event.js";
+import BallSetManager from "./BallSetManager.js";
 
 class View {
     constructor() {
@@ -41,6 +42,7 @@ class View {
         this.mod_winner = document.getElementById("modal_winner");
         this.mod_stats = document.getElementById("modal_stats");
         this.mod_delete_stats = document.getElementById("modal_delete");
+        this.mod_ball_preset = document.getElementById("modal_ball_preset");
 
         this.sel_winning_player = document.getElementById("sel_whoWon");
         this.btn_finish_game = document.getElementById("btn_finish");
@@ -56,6 +58,12 @@ class View {
 
         this.err_message = document.getElementById("error_text");
         this.btn_close_error = document.getElementById("btn_closeError");
+        
+        this.btn_customise_ball_set = document.getElementById("btn_customiseBallSet");
+        this.opt_ball_set_preset = document.getElementById("sel_ballSetPreset");
+        this.opts_ball_presets = document.getElementsByClassName("ballPreset");
+        this.btn_reset_ball_preset = document.getElementById("btn_resetBallPreset");
+        this.btn_close_ball_preset = document.getElementById("btn_closeBallPreset");
 
         this.lbl_game_code = document.getElementById("game_code");
         this.lbl_player_code = document.getElementById("player_code");
@@ -76,7 +84,9 @@ class View {
             "0 Balls (Sitting Out)", "1 Divulged Ball", "2 Divulged Balls", "1 Ball", "2 Balls", "3 Balls", "4 Balls", "5 Balls",
             "6 Balls", "7 Balls", "8 Balls", "9 Balls", "10 Balls", "11 Balls", "12 Balls", "13 Balls", "14 Balls", "15 Balls"
         ];
-
+        
+        this.ballSetManager = new BallSetManager();
+        
         this.startGameEvent = new Event();
         this.endGameEvent = new Event();
         this.pocketBallEvent = new Event();
@@ -89,11 +99,19 @@ class View {
         this._AssignEvents();
         this._RenderPlayerOptionsTable();
         this._RenderGameTable({is_game_in_progress: false});
+        
+        this._UpdateBallSet();
     }
 
     _RenderOptions() {
         this._PopulateSelect(this.opt_player_count, this.player_count_options);
         this._PopulateSelect(this.opt_ball_count, this.ball_count_options);
+        this._PopulateSelect(this.opt_ball_set_preset, this.ballSetManager.PresetNames());
+        this.opt_ball_set_preset.value = this.ballSetManager.InitialPresetSelection({});
+        for (let opt_ball_preset of this.opts_ball_presets) {
+            this._PopulateSelect(opt_ball_preset, ["Set Preset", ...this.ballSetManager.PresetNames()]);
+            opt_ball_preset.value = this.ballSetManager.InitialPresetSelection({ballId: opt_ball_preset.getAttribute("ball")});
+        }
         
         const options_player_count = localStorage.getItem("options_player_count");
         if (options_player_count !== null) {
@@ -168,6 +186,7 @@ class View {
 
         this.btn_close_stats.addEventListener("click", () => { this.mod_stats.style.display = "none"; });
         this.btn_close_error.addEventListener("click", () => { this.mod_error.style.display = "none"; });
+        this.btn_close_ball_preset.addEventListener("click", () => { this.mod_ball_preset.style.display = "none"; });
         this.btn_finish_game.addEventListener("click", () => { this._EndGame(); this.mod_winner.style.display = "none"; });
         this.btn_cancel_finish_game.addEventListener("click", () => { this.mod_winner.style.display = "none"; });
 
@@ -194,6 +213,44 @@ class View {
             this.requestDeleteStats.trigger(this.tbx_confirm_name.value);
             this.mod_delete_stats.style.display = "none";
         });
+        
+        this.btn_customise_ball_set.addEventListener("click", () => {
+            this.mod_ball_preset.style.display = "block";
+        });
+        
+        this.opt_ball_set_preset.addEventListener("change", () => {
+            this.ballSetManager.SavePreset({index: this.opt_ball_set_preset.value});
+            this._UpdateBallSet();
+        });
+        for (let opt_ball_preset of this.opts_ball_presets) {
+            opt_ball_preset.addEventListener("change", () => {
+                this.ballSetManager.SaveBall({ballId: opt_ball_preset.getAttribute("ball"), index: opt_ball_preset.value});
+                this._UpdateBall({ballId: opt_ball_preset.getAttribute("ball")});
+            });
+        }
+        this.btn_reset_ball_preset.addEventListener("click", () => {
+            this.ballSetManager.ResetAll();
+            this.opt_ball_set_preset.value = this.ballSetManager.InitialPresetSelection({});
+            for (let opt_ball_preset of this.opts_ball_presets) {
+                opt_ball_preset.value = this.ballSetManager.InitialPresetSelection({ballId: opt_ball_preset.getAttribute("ball")});
+            }
+            this._UpdateBallSet();
+        });
+    }
+    
+    _UpdateBall({ballId}) {
+        let src = this.ballSetManager.GetBallUrl({ballId: ballId});
+        let leadingNumber = ballId[0];
+        let trailingId = ballId.substring(1);
+        let imgs = document.querySelectorAll(`#\\3${leadingNumber} ${trailingId}`);
+        for (let img of imgs) {
+            img.setAttribute("src", src);
+        }
+    }
+    
+    _UpdateBallSet() {
+        for (let i = 0; i < 15; i++)
+            this._UpdateBall({ballId: `${i+1}ball`});
     }
 
     _RenderPlayerOptionsTable() {

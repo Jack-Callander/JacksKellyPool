@@ -1,4 +1,4 @@
-import Player_Stats from "./Player_Stats.js";
+import PlayerStats from "./PlayerStats.js";
 
 class Player {
     constructor({name, ball_count, divulged}) {
@@ -8,7 +8,7 @@ class Player {
         this._balls = [];
         this._divulged = divulged;
 
-        this._stats = new Player_Stats(name, divulged);
+        this._stats = new PlayerStats(name, divulged);
     }
 
     AddBall(ball) {
@@ -35,7 +35,7 @@ class Player {
 
     DeleteStats() {
         this._stats.DeleteStats();
-        this._stats = new Player_Stats(this._name, this._divulged);
+        this._stats = new PlayerStats(this._name, this._divulged);
     }
 
     get name() { return this._name; }

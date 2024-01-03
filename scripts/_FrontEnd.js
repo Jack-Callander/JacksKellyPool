@@ -5,17 +5,10 @@ window.addEventListener("load", () => {
 
 // Close modals that can be closed
 window.onclick = function(e) {
-    let m = document.getElementById("modal_newGame");
-    if (e.target == m) { m.style.display = "none"; }
-
-    m = document.getElementById("modal_balls");
-    if (e.target == m) { m.style.display = "none"; }
-
-    m = document.getElementById("modal_error");
-    if (e.target == m) { m.style.display = "none"; }
-
-    m = document.getElementById("modal_stats");
-    if (e.target == m) { m.style.display = "none"; }
+    let canCloseModals = document.getElementsByClassName("can_close");
+    for (element of canCloseModals) {
+        if (e.target == element) { element.style.display = "none"; }
+    }
 }
 
 // Connect to Firebase

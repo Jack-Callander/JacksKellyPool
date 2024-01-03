@@ -108,6 +108,9 @@
                 <div id="game_con" class="container border fill"></div>
 
                 <div id="game_tracker_con" class="container centered border fill" hidden>
+                    <div style="width: 100%; height: 0; overflow: visible;">
+                        <div id="btn_customiseBallSet" class="btn centered" style="float: right; height: 1rem;" checked>=</div>
+                    </div>
                     <div class="ball_rack">
                         <img id="1ball" class="img_ball" src="./images/aramith_tv_set/1ball.png" value="1" />
                     </div>
@@ -382,7 +385,7 @@
 
         <!-- PAGE MODALS : Queries and Alerts go here, as well as the ball check modal -->
 
-        <div id="modal_newGame" class="modal">
+        <div id="modal_newGame" class="modal can_close">
             <div class="container centered border modal_content">
                 Are you sure you want to start a new game?
                 <div id="btn_startNewGame" class="btn centered fill" outer_type checked>Yes, begin a new game</div>
@@ -390,7 +393,7 @@
             </div>
         </div>
 
-        <div id="modal_balls" class="modal">
+        <div id="modal_balls" class="modal can_close">
             <div class="container centered border modal_content">
                 <div id="player_code" class="code">No player code available (offline).</div>
                 <div id="show_balls_con">
@@ -414,7 +417,7 @@
             </div>
         </div>
 
-        <div id="modal_error" class="modal">
+        <div id="modal_error" class="modal can_close">
             <div class="container centered border modal_content">
                 <div id="error_text" class="error"></div>
                 <div id="btn_closeError" class="btn centered fill" outer_type checked>Close</div>
@@ -432,7 +435,7 @@
             </div>
         </div>
 
-        <div id="modal_stats" class="modal">
+        <div id="modal_stats" class="modal can_close">
             <div class="container centered border modal_content">
                 <div id="stats_title" name="Player">Player's Stats (Win Percentage)</div>
                 <div id="stats_con" class="container fill">
@@ -476,6 +479,83 @@
                 <input id="delete_confirm_name" class="text" delete_type value="" />
                 <div id="btn_confirm_delete" class="btn centered fill" outer_type checked highlighted hidden>Delete Player</div>
                 <div id="btn_cancel_delete" class="btn centered fill" outer_type checked>Cancel</div>
+            </div>
+        </div>
+        
+        <div id="modal_ball_preset" class="modal can_close">
+            <div class="container centered border modal_content">
+                Change Ball Visuals<br /><br />
+                <div class="container border fill" >
+                    <div class="option_elem">
+                        <div class="option_title">Ball Set Preset</div>
+                        <div class="option_data"><select id="sel_ballSetPreset" name="Ball Set Preset"></select></div>
+                    </div>
+                </div>
+                <br />Individual Balls<br /><br />
+                <div class="container border fill preview-scroll-container" >
+                    <div class="option_elem">
+                        <img id="1ball" class="img_ball_preview" src="./images/aramith_tv_set/1ball.png" value="1" />
+                        <div class="option_data"><select id="sel_ballPreset1" class="ballPreset" name="Ball Preset" ball="1ball"></select></div>
+                    </div>
+                    <div class="option_elem">
+                        <img id="2ball" class="img_ball_preview" src="./images/aramith_tv_set/2ball.png" value="2" />
+                        <div class="option_data"><select id="sel_ballPreset2" class="ballPreset" name="Ball Preset" ball="2ball"></select></div>
+                    </div>
+                    <div class="option_elem">
+                        <img id="3ball" class="img_ball_preview" src="./images/aramith_tv_set/3ball.png" value="3" />
+                        <div class="option_data"><select id="sel_ballPreset3" class="ballPreset" name="Ball Preset" ball="3ball"></select></div>
+                    </div>
+                    <div class="option_elem">
+                        <img id="4ball" class="img_ball_preview" src="./images/aramith_tv_set/4ball.png" value="4" />
+                        <div class="option_data"><select id="sel_ballPreset4" class="ballPreset" name="Ball Preset" ball="4ball"></select></div>
+                    </div>
+                    <div class="option_elem">
+                        <img id="5ball" class="img_ball_preview" src="./images/aramith_tv_set/5ball.png" value="5" />
+                        <div class="option_data"><select id="sel_ballPreset5" class="ballPreset" name="Ball Preset" ball="5ball"></select></div>
+                    </div>
+                    <div class="option_elem">
+                        <img id="6ball" class="img_ball_preview" src="./images/aramith_tv_set/6ball.png" value="6" />
+                        <div class="option_data"><select id="sel_ballPreset6" class="ballPreset" name="Ball Preset" ball="6ball"></select></div>
+                    </div>
+                    <div class="option_elem">
+                        <img id="7ball" class="img_ball_preview" src="./images/aramith_tv_set/7ball.png" value="7" />
+                        <div class="option_data"><select id="sel_ballPreset7" class="ballPreset" name="Ball Preset" ball="7ball"></select></div>
+                    </div>
+                    <div class="option_elem">
+                        <img id="8ball" class="img_ball_preview" src="./images/aramith_tv_set/8ball.png" value="8" />
+                        <div class="option_data"><select id="sel_ballPreset8" class="ballPreset" name="Ball Preset" ball="8ball"></select></div>
+                    </div>
+                    <div class="option_elem">
+                        <img id="9ball" class="img_ball_preview" src="./images/aramith_tv_set/9ball.png" value="9" />
+                        <div class="option_data"><select id="sel_ballPreset9" class="ballPreset" name="Ball Preset" ball="9ball"></select></div>
+                    </div>
+                    <div class="option_elem">
+                        <img id="10ball" class="img_ball_preview" src="./images/aramith_tv_set/10ball.png" value="10" />
+                        <div class="option_data"><select id="sel_ballPreset10" class="ballPreset" name="Ball Preset" ball="10ball"></select></div>
+                    </div>
+                    <div class="option_elem">
+                        <img id="11ball" class="img_ball_preview" src="./images/aramith_tv_set/11ball.png" value="11" />
+                        <div class="option_data"><select id="sel_ballPreset11" class="ballPreset" name="Ball Preset" ball="11ball"></select></div>
+                    </div>
+                    <div class="option_elem">
+                        <img id="12ball" class="img_ball_preview" src="./images/aramith_tv_set/12ball.png" value="12" />
+                        <div class="option_data"><select id="sel_ballPreset12" class="ballPreset" name="Ball Preset" ball="12ball"></select></div>
+                    </div>
+                    <div class="option_elem">
+                        <img id="13ball" class="img_ball_preview" src="./images/aramith_tv_set/13ball.png" value="13" />
+                        <div class="option_data"><select id="sel_ballPreset13" class="ballPreset" name="Ball Preset" ball="13ball"></select></div>
+                    </div>
+                    <div class="option_elem">
+                        <img id="14ball" class="img_ball_preview" src="./images/aramith_tv_set/14ball.png" value="14" />
+                        <div class="option_data"><select id="sel_ballPreset14" class="ballPreset" name="Ball Preset" ball="14ball"></select></div>
+                    </div>
+                    <div class="option_elem">
+                        <img id="15ball" class="img_ball_preview" src="./images/aramith_tv_set/15ball.png" value="15" />
+                        <div class="option_data"><select id="sel_ballPreset15" class="ballPreset" name="Ball Preset" ball="15ball"></select></div>
+                    </div>
+                </div>
+                <div id="btn_resetBallPreset" class="btn centered fill" outer_type checked>Reset All</div>
+                <div id="btn_closeBallPreset" class="btn centered fill" outer_type checked>Close</div>
             </div>
         </div>
     </body>

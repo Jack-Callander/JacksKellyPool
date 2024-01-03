@@ -112,6 +112,14 @@
     border-radius: 50%;
 }
 
+.img_ball_preview {
+    width: 7rem;
+    height: 7rem;
+    padding: 0rem 6rem;
+    margin: -0.25rem;
+    border-radius: 50%;
+}
+
 .ball_rack {
     margin: 0rem 0rem -1.05rem 0rem;
 }
@@ -189,4 +197,9 @@ tr {
 .bmc-btn-container {
     margin: 4rem;
     transform: scale(1.8, 1.8);
+}
+
+.preview-scroll-container {
+    height: 40rem;
+    overflow: scroll;
 }

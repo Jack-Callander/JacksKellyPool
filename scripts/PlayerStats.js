@@ -1,4 +1,4 @@
-class Player_Stats {
+class PlayerStats {
     constructor(player_name, divulged) {
         this.name = player_name;
         this.divulged = divulged;
@@ -127,4 +127,4 @@ class Player_Stats {
     }
 }
 
-export default Player_Stats;
+export default PlayerStats;
