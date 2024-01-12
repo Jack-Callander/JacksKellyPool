@@ -74,6 +74,22 @@ class Database {
 
         this.removedCodesEvent.trigger();
     }
+    
+    // unreferenced
+    __ClearOldGames() {
+        const date = new Date();
+        const current_time = date.getTime();
+        const two_days_ago = current_time - 172800000;
+        const reference = this._fb.ref("games").orderByChild("game_info/time").endAt(two_days_ago);
+        reference.on("value", (snapshot) => {
+            reference.off("value");
+            let count = 0;
+            Object.keys(snapshot.val()).forEach(key => {
+                this._fb.ref(`games/${key}`).remove();
+                count++;
+            });
+        });
+    }
 
     PocketBall({ball}) {
         if (this._rack.splice(this._rack.indexOf(ball), 1).length !== 0) {
