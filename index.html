@@ -112,29 +112,29 @@
                         <div id="btn_customiseBallSet" class="btn centered" style="float: right; height: 1rem;" checked>=</div>
                     </div>
                     <div class="ball_rack">
-                        <img id="1ball" class="img_ball" src="./images/aramith_tv_set/1ball.png" value="1" />
+                        <img id="1ball" class="img_ball" src="./images/aramith_tv_set/1ball.png" ball-image-num="1ball" value="1" />
                     </div>
                     <div class="ball_rack">
-                        <img id="2ball" class="img_ball" src="./images/aramith_tv_set/2ball.png" value="2" />
-                        <img id="3ball" class="img_ball" src="./images/aramith_tv_set/3ball.png" value="3" />
+                        <img id="2ball" class="img_ball" src="./images/aramith_tv_set/2ball.png" ball-image-num="2ball" value="2" />
+                        <img id="3ball" class="img_ball" src="./images/aramith_tv_set/3ball.png" ball-image-num="3ball" value="3" />
                     </div>
                     <div class="ball_rack">
-                        <img id="4ball" class="img_ball" src="./images/aramith_tv_set/4ball.png" value="4" />
-                        <img id="5ball" class="img_ball" src="./images/aramith_tv_set/5ball.png" value="5" />
-                        <img id="6ball" class="img_ball" src="./images/aramith_tv_set/6ball.png" value="6" />
+                        <img id="4ball" class="img_ball" src="./images/aramith_tv_set/4ball.png" ball-image-num="4ball" value="4" />
+                        <img id="5ball" class="img_ball" src="./images/aramith_tv_set/5ball.png" ball-image-num="5ball" value="5" />
+                        <img id="6ball" class="img_ball" src="./images/aramith_tv_set/6ball.png" ball-image-num="6ball" value="6" />
                     </div>
                     <div class="ball_rack">
-                        <img id="7ball" class="img_ball" src="./images/aramith_tv_set/7ball.png" value="7" />
-                        <img id="8ball" class="img_ball" src="./images/aramith_tv_set/8ball.png" value="8" />
-                        <img id="9ball" class="img_ball" src="./images/aramith_tv_set/9ball.png" value="9" />
-                        <img id="10ball" class="img_ball" src="./images/aramith_tv_set/10ball.png" value="10" />
+                        <img id="7ball" class="img_ball" src="./images/aramith_tv_set/7ball.png" ball-image-num="7ball" value="7" />
+                        <img id="8ball" class="img_ball" src="./images/aramith_tv_set/8ball.png" ball-image-num="8ball" value="8" />
+                        <img id="9ball" class="img_ball" src="./images/aramith_tv_set/9ball.png" ball-image-num="9ball" value="9" />
+                        <img id="10ball" class="img_ball" src="./images/aramith_tv_set/10ball.png" ball-image-num="10ball" value="10" />
                     </div>
                     <div class="ball_rack">
-                        <img id="11ball" class="img_ball" src="./images/aramith_tv_set/11ball.png" value="11" />
-                        <img id="12ball" class="img_ball" src="./images/aramith_tv_set/12ball.png" value="12" />
-                        <img id="13ball" class="img_ball" src="./images/aramith_tv_set/13ball.png" value="13" />
-                        <img id="14ball" class="img_ball" src="./images/aramith_tv_set/14ball.png" value="14" />
-                        <img id="15ball" class="img_ball" src="./images/aramith_tv_set/15ball.png" value="15" />
+                        <img id="11ball" class="img_ball" src="./images/aramith_tv_set/11ball.png" ball-image-num="11ball" value="11" />
+                        <img id="12ball" class="img_ball" src="./images/aramith_tv_set/12ball.png" ball-image-num="12ball" value="12" />
+                        <img id="13ball" class="img_ball" src="./images/aramith_tv_set/13ball.png" ball-image-num="13ball" value="13" />
+                        <img id="14ball" class="img_ball" src="./images/aramith_tv_set/14ball.png" ball-image-num="14ball" value="14" />
+                        <img id="15ball" class="img_ball" src="./images/aramith_tv_set/15ball.png" ball-image-num="15ball" value="15" />
                     </div>
                     <div class="rack_spacer"></div>
                 </div>
@@ -215,7 +215,7 @@
                     Made by Jack Callander. <br /> <br />
                     Cheers Travis, Thomas, Edward, Brendan, Richard, Ethan, Lyam, Bella, James, Carlos, Jackson, Aisha and Massi
                     for inspiration and playtesting! <br /> <br />
-                    Version 2 created on the 3rd of May 2021. Last Updated 3rd of January 2024. Currently Version 2.7
+                    Version 2 created on the 3rd of May 2021. Last Updated 13th of January 2024. Currently Version 2.7.1
                 </div>
                 
                 <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="jackc" data-color="#dd4444" data-emoji="🍺"  data-font="Cookie" data-text="Buy me a drink" data-outline-color="#ffffff" data-font-color="#ffffff" data-coffee-color="#FFDD00" ></script>
@@ -381,6 +381,11 @@
                     Added the ability to change the colour of the balls in case the game is being played with a different set. For
                     example with the standard pool balls where the 4 and 12 ball are purple.
                     </p>
+                    <b>Version 2.7.1</b> <br />
+                    <p>
+                    Fixed path to divulged ball images. They should now show the balls again, and match the current ball set
+                    settings.
+                    </p>
                 </div>
             </div>
 
@@ -402,21 +407,21 @@
             <div class="container centered border modal_content">
                 <div id="player_code" class="code">No player code available (offline).</div>
                 <div id="show_balls_con">
-                    <figure id="ball1" class="ballfig"><img src="./images/aramith_tv_set/1ball.png" id="1ball" class="ballimg ballimg1" /><figcaption>1 Ball | Yellow | Solid</figcaption></figure>
-                    <figure id="ball2" class="ballfig"><img src="./images/aramith_tv_set/2ball.png" id="2ball" class="ballimg ballimg2" /><figcaption>2 Ball | Blue | Solid</figcaption></figure>
-                    <figure id="ball3" class="ballfig"><img src="./images/aramith_tv_set/3ball.png" id="3ball" class="ballimg ballimg3" /><figcaption>3 Ball | Red | Solid</figcaption></figure>
-                    <figure id="ball4" class="ballfig"><img src="./images/aramith_tv_set/4ball.png" id="4ball" class="ballimg ballimg4" /><figcaption>4 Ball | Pink or Purple | Solid</figcaption></figure>
-                    <figure id="ball5" class="ballfig"><img src="./images/aramith_tv_set/5ball.png" id="5ball" class="ballimg ballimg5" /><figcaption>5 Ball | Orange | Solid</figcaption></figure>
-                    <figure id="ball6" class="ballfig"><img src="./images/aramith_tv_set/6ball.png" id="6ball" class="ballimg ballimg6" /><figcaption>6 Ball | Green | Solid</figcaption></figure>
-                    <figure id="ball7" class="ballfig"><img src="./images/aramith_tv_set/7ball.png" id="7ball" class="ballimg ballimg7" /><figcaption>7 Ball | Brown | Solid</figcaption></figure>
-                    <figure id="ball8" class="ballfig"><img src="./images/aramith_tv_set/8ball.png" id="8ball" class="ballimg ballimg8" /><figcaption>8 Ball | Black | Solid</figcaption></figure>
-                    <figure id="ball9" class="ballfig"><img src="./images/aramith_tv_set/9ball.png" id="9ball" class="ballimg ballimg9" /><figcaption>9 Ball | Yellow | Stripe</figcaption></figure>
-                    <figure id="ball10" class="ballfig"><img src="./images/aramith_tv_set/10ball.png" id="10ball" class="ballimg ballimg10" /><figcaption>10 Ball | Blue | Stripe</figcaption></figure>
-                    <figure id="ball11" class="ballfig"><img src="./images/aramith_tv_set/11ball.png" id="11ball" class="ballimg ballimg11" /><figcaption>11 Ball | Red | Stripe</figcaption></figure>
-                    <figure id="ball12" class="ballfig"><img src="./images/aramith_tv_set/12ball.png" id="12ball" class="ballimg ballimg12" /><figcaption>12 Ball | Pink or Purple | Stripe</figcaption></figure>
-                    <figure id="ball13" class="ballfig"><img src="./images/aramith_tv_set/13ball.png" id="13ball" class="ballimg ballimg13" /><figcaption>13 Ball | Orange | Stripe</figcaption></figure>
-                    <figure id="ball14" class="ballfig"><img src="./images/aramith_tv_set/14ball.png" id="14ball" class="ballimg ballimg14" /><figcaption>14 Ball | Green | Stripe</figcaption></figure>
-                    <figure id="ball15" class="ballfig"><img src="./images/aramith_tv_set/15ball.png" id="15ball" class="ballimg ballimg15" /><figcaption>15 Ball | Brown | Stripe</figcaption></figure>
+                    <figure id="ball1" class="ballfig"><img src="./images/aramith_tv_set/1ball.png" id="1ball" class="ballimg ballimg1" ball-image-num="1ball" /><figcaption>1 Ball | Yellow | Solid</figcaption></figure>
+                    <figure id="ball2" class="ballfig"><img src="./images/aramith_tv_set/2ball.png" id="2ball" class="ballimg ballimg2" ball-image-num="2ball" /><figcaption>2 Ball | Blue | Solid</figcaption></figure>
+                    <figure id="ball3" class="ballfig"><img src="./images/aramith_tv_set/3ball.png" id="3ball" class="ballimg ballimg3" ball-image-num="3ball" /><figcaption>3 Ball | Red | Solid</figcaption></figure>
+                    <figure id="ball4" class="ballfig"><img src="./images/aramith_tv_set/4ball.png" id="4ball" class="ballimg ballimg4" ball-image-num="4ball" /><figcaption>4 Ball | Pink or Purple | Solid</figcaption></figure>
+                    <figure id="ball5" class="ballfig"><img src="./images/aramith_tv_set/5ball.png" id="5ball" class="ballimg ballimg5" ball-image-num="5ball" /><figcaption>5 Ball | Orange | Solid</figcaption></figure>
+                    <figure id="ball6" class="ballfig"><img src="./images/aramith_tv_set/6ball.png" id="6ball" class="ballimg ballimg6" ball-image-num="6ball" /><figcaption>6 Ball | Green | Solid</figcaption></figure>
+                    <figure id="ball7" class="ballfig"><img src="./images/aramith_tv_set/7ball.png" id="7ball" class="ballimg ballimg7" ball-image-num="7ball" /><figcaption>7 Ball | Brown | Solid</figcaption></figure>
+                    <figure id="ball8" class="ballfig"><img src="./images/aramith_tv_set/8ball.png" id="8ball" class="ballimg ballimg8" ball-image-num="8ball" /><figcaption>8 Ball | Black | Solid</figcaption></figure>
+                    <figure id="ball9" class="ballfig"><img src="./images/aramith_tv_set/9ball.png" id="9ball" class="ballimg ballimg9" ball-image-num="9ball" /><figcaption>9 Ball | Yellow | Stripe</figcaption></figure>
+                    <figure id="ball10" class="ballfig"><img src="./images/aramith_tv_set/10ball.png" id="10ball" class="ballimg ballimg10" ball-image-num="10ball" /><figcaption>10 Ball | Blue | Stripe</figcaption></figure>
+                    <figure id="ball11" class="ballfig"><img src="./images/aramith_tv_set/11ball.png" id="11ball" class="ballimg ballimg11" ball-image-num="11ball" /><figcaption>11 Ball | Red | Stripe</figcaption></figure>
+                    <figure id="ball12" class="ballfig"><img src="./images/aramith_tv_set/12ball.png" id="12ball" class="ballimg ballimg12" ball-image-num="12ball" /><figcaption>12 Ball | Pink or Purple | Stripe</figcaption></figure>
+                    <figure id="ball13" class="ballfig"><img src="./images/aramith_tv_set/13ball.png" id="13ball" class="ballimg ballimg13" ball-image-num="13ball" /><figcaption>13 Ball | Orange | Stripe</figcaption></figure>
+                    <figure id="ball14" class="ballfig"><img src="./images/aramith_tv_set/14ball.png" id="14ball" class="ballimg ballimg14" ball-image-num="14ball" /><figcaption>14 Ball | Green | Stripe</figcaption></figure>
+                    <figure id="ball15" class="ballfig"><img src="./images/aramith_tv_set/15ball.png" id="15ball" class="ballimg ballimg15" ball-image-num="15ball" /><figcaption>15 Ball | Brown | Stripe</figcaption></figure>
                 </div>
                 <div id="btn_closeBalls" class="btn centered fill" outer_type checked>Okay, Close</div>
             </div>
@@ -499,63 +504,63 @@
                 <br />Individual Balls<br /><br />
                 <div class="container border fill preview-scroll-container" >
                     <div class="option_elem">
-                        <img id="1ball" class="img_ball_preview" src="./images/aramith_tv_set/1ball.png" value="1" />
+                        <img class="img_ball_preview" src="./images/aramith_tv_set/1ball.png" value="1" ball-image-num="1ball" />
                         <div class="option_data"><select id="sel_ballPreset1" class="ballPreset" name="Ball Preset" ball="1ball"></select></div>
                     </div>
                     <div class="option_elem">
-                        <img id="2ball" class="img_ball_preview" src="./images/aramith_tv_set/2ball.png" value="2" />
+                        <img class="img_ball_preview" src="./images/aramith_tv_set/2ball.png" value="2" ball-image-num="2ball" />
                         <div class="option_data"><select id="sel_ballPreset2" class="ballPreset" name="Ball Preset" ball="2ball"></select></div>
                     </div>
                     <div class="option_elem">
-                        <img id="3ball" class="img_ball_preview" src="./images/aramith_tv_set/3ball.png" value="3" />
+                        <img class="img_ball_preview" src="./images/aramith_tv_set/3ball.png" value="3" ball-image-num="3ball" />
                         <div class="option_data"><select id="sel_ballPreset3" class="ballPreset" name="Ball Preset" ball="3ball"></select></div>
                     </div>
                     <div class="option_elem">
-                        <img id="4ball" class="img_ball_preview" src="./images/aramith_tv_set/4ball.png" value="4" />
+                        <img class="img_ball_preview" src="./images/aramith_tv_set/4ball.png" value="4" ball-image-num="4ball" />
                         <div class="option_data"><select id="sel_ballPreset4" class="ballPreset" name="Ball Preset" ball="4ball"></select></div>
                     </div>
                     <div class="option_elem">
-                        <img id="5ball" class="img_ball_preview" src="./images/aramith_tv_set/5ball.png" value="5" />
+                        <img class="img_ball_preview" src="./images/aramith_tv_set/5ball.png" value="5" ball-image-num="5ball" />
                         <div class="option_data"><select id="sel_ballPreset5" class="ballPreset" name="Ball Preset" ball="5ball"></select></div>
                     </div>
                     <div class="option_elem">
-                        <img id="6ball" class="img_ball_preview" src="./images/aramith_tv_set/6ball.png" value="6" />
+                        <img class="img_ball_preview" src="./images/aramith_tv_set/6ball.png" value="6" ball-image-num="6ball" />
                         <div class="option_data"><select id="sel_ballPreset6" class="ballPreset" name="Ball Preset" ball="6ball"></select></div>
                     </div>
                     <div class="option_elem">
-                        <img id="7ball" class="img_ball_preview" src="./images/aramith_tv_set/7ball.png" value="7" />
+                        <img class="img_ball_preview" src="./images/aramith_tv_set/7ball.png" value="7" ball-image-num="7ball" />
                         <div class="option_data"><select id="sel_ballPreset7" class="ballPreset" name="Ball Preset" ball="7ball"></select></div>
                     </div>
                     <div class="option_elem">
-                        <img id="8ball" class="img_ball_preview" src="./images/aramith_tv_set/8ball.png" value="8" />
+                        <img class="img_ball_preview" src="./images/aramith_tv_set/8ball.png" value="8" ball-image-num="8ball" />
                         <div class="option_data"><select id="sel_ballPreset8" class="ballPreset" name="Ball Preset" ball="8ball"></select></div>
                     </div>
                     <div class="option_elem">
-                        <img id="9ball" class="img_ball_preview" src="./images/aramith_tv_set/9ball.png" value="9" />
+                        <img class="img_ball_preview" src="./images/aramith_tv_set/9ball.png" value="9" ball-image-num="9ball" />
                         <div class="option_data"><select id="sel_ballPreset9" class="ballPreset" name="Ball Preset" ball="9ball"></select></div>
                     </div>
                     <div class="option_elem">
-                        <img id="10ball" class="img_ball_preview" src="./images/aramith_tv_set/10ball.png" value="10" />
+                        <img class="img_ball_preview" src="./images/aramith_tv_set/10ball.png" value="10" ball-image-num="10ball" />
                         <div class="option_data"><select id="sel_ballPreset10" class="ballPreset" name="Ball Preset" ball="10ball"></select></div>
                     </div>
                     <div class="option_elem">
-                        <img id="11ball" class="img_ball_preview" src="./images/aramith_tv_set/11ball.png" value="11" />
+                        <img class="img_ball_preview" src="./images/aramith_tv_set/11ball.png" value="11" ball-image-num="11ball" />
                         <div class="option_data"><select id="sel_ballPreset11" class="ballPreset" name="Ball Preset" ball="11ball"></select></div>
                     </div>
                     <div class="option_elem">
-                        <img id="12ball" class="img_ball_preview" src="./images/aramith_tv_set/12ball.png" value="12" />
+                        <img class="img_ball_preview" src="./images/aramith_tv_set/12ball.png" value="12" ball-image-num="12ball" />
                         <div class="option_data"><select id="sel_ballPreset12" class="ballPreset" name="Ball Preset" ball="12ball"></select></div>
                     </div>
                     <div class="option_elem">
-                        <img id="13ball" class="img_ball_preview" src="./images/aramith_tv_set/13ball.png" value="13" />
+                        <img class="img_ball_preview" src="./images/aramith_tv_set/13ball.png" value="13" ball-image-num="13ball" />
                         <div class="option_data"><select id="sel_ballPreset13" class="ballPreset" name="Ball Preset" ball="13ball"></select></div>
                     </div>
                     <div class="option_elem">
-                        <img id="14ball" class="img_ball_preview" src="./images/aramith_tv_set/14ball.png" value="14" />
+                        <img class="img_ball_preview" src="./images/aramith_tv_set/14ball.png" value="14" ball-image-num="14ball" />
                         <div class="option_data"><select id="sel_ballPreset14" class="ballPreset" name="Ball Preset" ball="14ball"></select></div>
                     </div>
                     <div class="option_elem">
-                        <img id="15ball" class="img_ball_preview" src="./images/aramith_tv_set/15ball.png" value="15" />
+                        <img class="img_ball_preview" src="./images/aramith_tv_set/15ball.png" value="15" ball-image-num="15ball" />
                         <div class="option_data"><select id="sel_ballPreset15" class="ballPreset" name="Ball Preset" ball="15ball"></select></div>
                     </div>
                 </div>

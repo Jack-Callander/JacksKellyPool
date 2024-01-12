@@ -240,9 +240,7 @@ class View {
     
     _UpdateBall({ballId}) {
         let src = this.ballSetManager.GetBallUrl({ballId: ballId});
-        let leadingNumber = ballId[0];
-        let trailingId = ballId.substring(1);
-        let imgs = document.querySelectorAll(`#\\3${leadingNumber} ${trailingId}`);
+        let imgs = document.querySelectorAll(`img[ball-image-num="${ballId}"]`);
         for (let img of imgs) {
             img.setAttribute("src", src);
         }
@@ -338,7 +336,10 @@ class View {
                         const divulged_ball = document.createElement("img");
                         divulged_ball.setAttribute("class", "divulged_ball");
                         divulged_ball.setAttribute("id", `dball${initial_balls_list[i].balls[j]}`);
-                        divulged_ball.setAttribute("src", `./images/${initial_balls_list[i].balls[j]}ball.png`);
+                        const ball_id = `${initial_balls_list[i].balls[j]}ball`;
+                        const ball_src = this.ballSetManager.GetBallUrl({ballId: ball_id});
+                        divulged_ball.setAttribute("src", ball_src);
+                        divulged_ball.setAttribute("ball-image-num", ball_id);
                         divulged_con.appendChild(divulged_ball);
                     }
                     row_element.appendChild(divulged_con);
